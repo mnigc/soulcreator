@@ -24,14 +24,14 @@ const icon = Object.keys(iconMap).find(k => slug.includes(k))
 ---
 
 <div
-  class={`glass glass-hover tool-card ${className}`.trim()}
+  class={`tool-card ${className}`.trim()}
   data-od-id={`tool-card-${slug}`}
   data-category={category || ''}
 >
   <a href={`/tools/${slug}`} class="tool-card-link" aria-label={`查看 ${title}`}></a>
   <div class="tool-card-content">
     <div class="tool-card-head">
-      <div class="tool-icon" style="color: var(--accent);">
+      <div class="tool-icon">
         <ToolIcon name={icon} size={24} />
       </div>
       <span class="tool-platform-tag">{platform}</span>

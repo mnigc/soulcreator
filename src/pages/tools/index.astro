@@ -9,25 +9,25 @@ const categories = [...new Set(flatTools.map(t => t.category))];
 ---
 
 <Base title="所有工具 — SoulCreator" description="SoulCreator 的所有工具产品一览，包括浏览器扩展、桌面应用和效率工具。">
-  <div class="page tools-index-header" data-od-id="tools-header">
-    <span class="eyebrow">Product Catalog</span>
-    <h1 style="margin-top: 0.75rem;">
-      所有<span class="gradient-text">工具</span>
+
+  <section class="tools-index-header">
+    <span class="label">Product Catalog</span>
+    <h1 style="margin-top: 0.5rem; font-size: clamp(2.2rem, 5vw, 4rem);">
+      所有<span style="color: var(--accent);">工具</span>
     </h1>
-    <p style="color: var(--muted); margin-top: 0.75rem; max-width: 500px; margin-inline: auto;">
+    <p style="color: var(--neutral-600); margin-top: 0.75rem; max-width: 500px; margin-inline: auto; font-size: 0.95rem;">
       从浏览器扩展到桌面应用，找到提升你效率的得力助手。
     </p>
-
     <div class="tools-filter">
       <button class="filter-btn active" data-filter="all">全部</button>
       {categories.map(cat => (
         <button class="filter-btn" data-filter={cat}>{cat}</button>
       ))}
     </div>
-  </div>
+  </section>
 
   <section class="section page" data-od-id="tools-list">
-    <div class="tools-grid">
+    <div class="tool-grid">
       {flatTools.map(tool => (
         <ToolCard {...tool} data-category={tool.category} />
       ))}
