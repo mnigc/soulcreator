@@ -1,0 +1,238 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import ToolCard from '../components/ui/ToolCard.astro';
+import CodeBlock from '../components/ui/CodeBlock.astro';
+import InstallPanel from '../components/ui/InstallPanel.astro';
+
+const tools = await getCollection('tools');
+const featuredTools = tools.slice(0, 4).map(t => ({ slug: t.slug, ...t.data }));
+
+const apiSnippet = `<span class="tok-keyword">import</span> { convert } <span class="tok-keyword">from</span> <span class="tok-string">"@soulcreator/omnimd"</span>;
+
+<span class="tok-comment">// 把任意内容转成结构化 Markdown</span>
+<span class="tok-keyword">const</span> md = <span class="tok-keyword">await</span> convert.<span class="tok-function">toMarkdown</span>({
+  <span class="tok-property">input</span>: <span class="tok-string">"./scan.png"</span>,
+  <span class="tok-property">ocr</span>: <span class="tok-number">true</span>,
+  <span class="tok-property">lang</span>: <span class="tok-string">"zh"</span>,
+});
+
+console.<span class="tok-function">log</span>(md); <span class="tok-comment">// # 标题 / - 列表 / \`code\`</span>`;
+
+const cliSnippet = `<span class="tok-comment"># 一行命令完成媒体转码</span>
+<span class="tok-function">npx</span> @soulcreator/mediapress <span class="tok-operator">--</span>input clip.mov <span class="tok-operator">--</span>to mp4 <span class="tok-operator">--</span>crf <span class="tok-number">23</span>
+
+<span class="tok-comment"># 剪贴板历史导出</span>
+<span class="tok-function">scm</span> export <span class="tok-operator">--</span>format json <span class="tok-operator">></span> history.json`;
+
+const compareRows = [
+  { feature: '浏览器扩展', values: ['✓', '–', '–', '–'] },
+  { feature: '桌面应用', values: ['–', '✓', '✓', '✓'] },
+  { feature: '本地优先 · 隐私', values: ['✓', '✓', '✓', '✓'] },
+  { feature: '完全免费', values: ['✓', '✓', '✓', '✓'] },
+  { feature: '开源', values: ['✓', '✓', '✓', '✓'] },
+  { feature: '批量处理', values: ['–', '✓', '✓', '✓'] },
+];
+
+const integrations = [
+  { name: 'Chrome', desc: '浏览器扩展' },
+  { name: 'Edge', desc: '浏览器扩展' },
+  { name: 'VS Code', desc: '编辑器插件' },
+  { name: 'GitHub', desc: 'Action 集成' },
+  { name: 'Figma', desc: '设计稿导入' },
+  { name: 'Notion', desc: '文档同步' },
+  { name: 'Raycast', desc: '快捷启动' },
+  { name: 'CLI', desc: '终端命令' },
+];
+
+const faqs = [
+  { q: '这些工具收费吗？', a: '全部免费。没有付费墙，没有隐藏收费，所有功能都开放使用。' },
+  { q: '代码开源吗？', a: '是的，核心代码以 MIT 协议开源，你可以在 GitHub 上 fork、修改、自托管。' },
+  { q: '我的数据安全吗？', a: '桌面类工具均在本地完成处理，不上传任何文件到服务器；浏览器扩展也在页面内本地运算。' },
+  { q: '支持哪些平台？', a: '浏览器扩展支持 Chrome / Edge；桌面应用支持 Windows / macOS / Linux；另外提供命令行入口。' },
+];
+---
+
+<Base title="SoulCreator — 一名独立开发者的小工具" description="SoulCreator 是一名独立开发者做的工具集合：网页货币转换、媒体格式转换与压缩、万物转 Markdown 等。免费、开源、本地优先。">
+  <section class="hero" data-od-id="hero">
+    <span class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+        <circle cx="6" cy="6" r="5" fill="currentColor" opacity="0.3"/>
+        <circle cx="6" cy="6" r="2" fill="currentColor"/>
+      </svg>
+      indie dev · 免费 · 开源
+    </span>
+
+    <h1 class="hero-title">
+      我做的几个<span class="gradient-text">小工具</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      我是 SoulCreator，一名独立开发者。下面这些工具都来自我自己日常里的痛点——
+      顺手做出来，免费、开源、能本地跑就本地跑。
+    </p>
+
+    <InstallPanel />
+
+
+  </section>
+
+  <section class="section page" data-od-id="featured-tools">
+    <div style="margin-bottom: 2.5rem;">
+      <span class="eyebrow">tools</span>
+      <h2 style="margin-top: 0.75rem;">我做了些什么</h2>
+      <p style="color: var(--muted); margin-top: 0.5rem; max-width: 520px;">
+        每一个都为了解决一个具体的小问题，而不是为了"生态"。
+      </p>
+    </div>
+
+    <div class="tools-grid">
+      {featuredTools.map(tool => (
+        <ToolCard {...tool} />
+      ))}
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <a href="/tools" class="btn btn-ghost">
+        查看全部工具
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="code-preview">
+    <div style="margin-bottom: 2.5rem;">
+      <span class="eyebrow">usage</span>
+      <h2 style="margin-top: 0.75rem;">几行代码就能用</h2>
+      <p style="color: var(--muted); margin-top: 0.5rem; max-width: 540px;">
+        每个工具都提供清晰的 API 与命令行入口，复制即用，不绑架你的工程。
+      </p>
+    </div>
+
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
+      <CodeBlock filename="convert.ts" lang="ts" code={apiSnippet} />
+      <CodeBlock filename="terminal" lang="sh" code={cliSnippet} />
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="compare">
+    <div style="margin-bottom: 2.5rem;">
+      <span class="eyebrow">compare</span>
+      <h2 style="margin-top: 0.75rem;">四个工具，各管一摊</h2>
+      <p style="color: var(--muted); margin-top: 0.5rem; max-width: 520px;">
+        没有"全家桶"，只有刚好够用的小工具。
+      </p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>能力</th>
+            <th>网页货币转换</th>
+            <th>媒体转换</th>
+            <th>万物转 MD</th>
+            <th>剪贴板</th>
+          </tr>
+        </thead>
+        <tbody>
+          {compareRows.map(row => (
+            <tr>
+              <th>{row.feature}</th>
+              {row.values.map(v => (
+                <td class={v === '✓' ? 'compare-yes' : 'compare-no'}>{v}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="integrations">
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+      <span class="eyebrow">integrations</span>
+      <h2 style="margin-top: 0.75rem;">融入你已有的工具链</h2>
+      <p style="color: var(--muted); margin-top: 0.5rem;">浏览器、编辑器、剪贴板增强器，哪里顺手就放哪里。</p>
+    </div>
+
+    <div class="integrations">
+      {integrations.map(item => (
+        <div class="integration-card">
+          <span class="ic-name"><span class="dot"></span>{item.name}</span>
+          <span class="ic-desc">{item.desc}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="faq">
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+      <span class="eyebrow">faq</span>
+      <h2 style="margin-top: 0.75rem;">常见问题</h2>
+      <p style="color: var(--muted); margin-top: 0.5rem;">关于 SoulCreator 与这些工具的一些疑问。</p>
+    </div>
+
+    <div class="faq-grid">
+      {faqs.map(item => (
+        <div class="glass faq-item">
+          <p class="faq-q">{item.q}</p>
+          <p class="faq-a">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="docs">
+    <div class="glass glass-hover docs-band">
+      <div style="max-width: 560px;">
+        <span class="eyebrow">docs</span>
+        <h2>想深入研究？看文档</h2>
+        <p style="color: var(--muted); line-height: 1.8;">
+          每个工具都有独立的安装说明、API 参考与常见问题。从一行命令开始，几分钟就能跑起来。
+        </p>
+      </div>
+      <a href="https://github.com/soulcreator#readme" class="btn btn-primary" target="_blank" rel="noopener">
+        阅读文档
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="about-teaser">
+    <div class="glass glass-hover" style="padding: 2.5rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
+      <div style="max-width: 560px;">
+        <span class="eyebrow">why</span>
+        <h2 style="margin: 0.75rem 0 1rem;">为什么做这些工具</h2>
+        <p style="color: var(--muted); line-height: 1.8;">
+          我不太信"一个 App 解决所有事"。更想要的是那种——打开就能用、用完就走的小东西。
+          如果你也这么想，欢迎随便逛逛，或者去 GitHub 提个建议。
+        </p>
+      </div>
+      <a href="https://github.com/soulcreator" class="btn btn-primary" target="_blank" rel="noopener">
+        去 GitHub 看看
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.cmd-copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const cmd = btn.closest('.cmd')?.dataset.cmd || '';
+        try {
+          await navigator.clipboard.writeText(cmd);
+          const prev = btn.textContent;
+          btn.textContent = 'copied';
+          setTimeout(() => (btn.textContent = prev), 1500);
+        } catch (e) { /* clipboard unavailable */ }
+      });
+    });
+  </script>
+</Base>

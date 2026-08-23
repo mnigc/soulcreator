@@ -1,0 +1,48 @@
+---
+import ToolIcon from './ToolIcon.astro';
+import type { ToolData } from '../props';
+
+type Props = ToolData & {
+  maxTags?: number;
+  className?: string;
+};
+
+const { slug, title, titleEn, description, tags = [], platform, maxTags = 3, className = '' } = Astro.props;
+
+const category = Astro.props.dataCategory as string | undefined;
+
+const iconMap: Record<string, string> = {
+  currency: 'currency',
+  medi: 'media',
+  omni: 'markdown',
+  clipboard: 'clipboard',
+};
+
+const icon = Object.keys(iconMap).find(k => slug.includes(k))
+  ? iconMap[Object.keys(iconMap).find(k => slug.includes(k))!]
+  : 'currency';
+---
+
+<div
+  class={`glass glass-hover tool-card ${className}`.trim()}
+  data-od-id={`tool-card-${slug}`}
+  data-category={category || ''}
+>
+  <a href={`/tools/${slug}`} class="tool-card-link" aria-label={`查看 ${title}`}></a>
+  <div class="tool-card-content">
+    <div class="tool-card-head">
+      <div class="tool-icon" style="color: var(--accent);">
+        <ToolIcon name={icon} size={24} />
+      </div>
+      <span class="tool-platform-tag">{platform}</span>
+    </div>
+    <div>
+      <h3 class="tool-title">{title}</h3>
+      <p class="tool-title-en">{titleEn}</p>
+    </div>
+    <p class="tool-desc">{description}</p>
+    <div class="tool-tags">
+      {tags.slice(0, maxTags).map(tag => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</div>

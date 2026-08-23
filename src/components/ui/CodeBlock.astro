@@ -1,0 +1,18 @@
+---
+type Props = {
+  filename?: string;
+  lang?: string;
+  code: string; // pre-marked-up HTML string with token spans
+};
+
+const { filename = 'snippet', lang = 'ts', code } = Astro.props;
+---
+
+<div class="codeblock">
+  <div class="codeblock-bar">
+    <i></i><i></i><i></i>
+    <span class="codeblock-file">{filename}</span>
+    <span class="codeblock-lang">{lang}</span>
+  </div>
+  <pre class="codeblock-body"><code set:html={code} /></pre>
+</div>

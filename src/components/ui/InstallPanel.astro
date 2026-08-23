@@ -1,0 +1,87 @@
+---
+const tabs = [
+  { id: 'vscode', label: 'VS Code' },
+  { id: 'jetbrains', label: 'JetBrains' },
+  { id: 'cli', label: 'CLI' },
+  { id: 'cloud', label: 'Cloud' },
+];
+---
+
+<div class="install-panel">
+  <div class="install-tabs" role="tablist">
+    {tabs.map(tab => (
+      <button
+        class="install-tab"
+        role="tab"
+        data-tab={tab.id}
+        class:list={['install-tab', { active: tab.id === 'vscode' }]}
+        type="button"
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+  <div class="install-panel-body">
+    <div class="install-panel-content active" data-panel="vscode">
+      <div class="install-cmd" data-cmd="vscode:extension/soulcreator.tools">
+        <span class="prompt">$</span> vscode:extension/soulcreator.tools
+        <button class="cmd-copy" type="button">copy</button>
+      </div>
+      <a href="/tools" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex;">
+        浏览工具
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="install-panel-content" data-panel="jetbrains">
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        桌面应用即将支持 JetBrains Gateway。
+      </p>
+      <a href="https://github.com/soulcreator" class="btn btn-ghost" target="_blank" rel="noopener">
+        在 GitHub 关注进度
+      </a>
+    </div>
+    <div class="install-panel-content" data-panel="cli">
+      <div class="install-cmd" data-cmd="npx @soulcreator/cli">
+        <span class="prompt">$</span> npx @soulcreator/cli
+        <button class="cmd-copy" type="button">copy</button>
+      </div>
+      <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.75rem;">
+        需要 Node.js >= 18。
+      </p>
+    </div>
+    <div class="install-panel-content" data-panel="cloud">
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        云端版本开发中，优先本地体验。
+      </p>
+      <a href="https://github.com/soulcreator" class="btn btn-ghost" target="_blank" rel="noopener">
+        在 GitHub 关注进度
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.install-tab');
+  const panels = document.querySelectorAll('.install-panel-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`[data-panel="${tab.dataset.tab}"]`)?.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.install-panel .cmd-copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const cmd = btn.closest('.install-cmd')?.dataset.cmd || '';
+      try {
+        await navigator.clipboard.writeText(cmd);
+        const prev = btn.textContent;
+        btn.textContent = 'copied';
+        setTimeout(() => (btn.textContent = prev), 1500);
+      } catch (e) { /* clipboard unavailable */ }
+    });
+  });
+</script>

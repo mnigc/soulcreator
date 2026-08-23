@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map(tool => ({
+    params: { slug: tool.slug },
+    props: tool,
+  }));
+}
+
+const { props } = Astro;
+const tool = { ...props.data };
+const faq = tool.faq || [];
+---
+
+<Base title={`${tool.title} — SoulCreator`} description={tool.description}>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: tool.title,
+      description: tool.description,
+      applicationCategory: tool.category,
+      operatingSystem: tool.platform,
+      offers: { '@type': 'Offer', price: '0' },
+    })}
+  </script>
+
+  <section class="detail-hero" data-od-id="detail-hero">
+    <span class="eyebrow">{tool.category}</span>
+    <h1 class="detail-title">{tool.title}</h1>
+    <p class="detail-subtitle">{tool.description}</p>
+    <div class="detail-cta-group">
+      <a href="#" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 3l4 4-4 4M16 7H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        立即下载
+      </a>
+      <a href="https://github.com/soulcreator" class="btn btn-ghost" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="10" cy="10" r="7"/><path d="M8 13h4M8 10h4M8 7h4" stroke-linecap="round"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="detail-tags">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+      <span class="tag" style="background: rgba(167, 139, 250, 0.1); color: var(--violet); border-color: rgba(167, 139, 250, 0.2);">
+        {tool.platform}
+      </span>
+      {tool.tags.map(tag => <span class="tag">{tag}</span>)}
+    </div>
+  </section>
+
+  {faq.length > 0 && (
+    <section class="section page" data-od-id="faq-section">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="eyebrow">FAQ</span>
+        <h2 style="margin-top: 0.75rem;">常见问题</h2>
+        <p style="color: var(--muted); margin-top: 0.5rem;">关于 {tool.title} 的常见疑问解答</p>
+      </div>
+
+      <div class="faq-grid" style="max-width: 800px; margin: 0 auto;">
+        {faq.map(item => (
+          <div class="glass faq-item" data-od-id={`faq-${item.q.slice(0, 10)}`}>
+            <p class="faq-q">{item.q}</p>
+            <p class="faq-a">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="section page" data-od-id="back-to-tools">
+    <div style="text-align: center;">
+      <p style="color: var(--muted); margin-bottom: 1rem;">对 {tool.title} 感兴趣？</p>
+      <a href="/tools" class="btn btn-ghost">
+        查看其他工具
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Base>

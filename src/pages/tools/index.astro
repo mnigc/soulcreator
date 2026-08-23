@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import ToolCard from '../../components/ui/ToolCard.astro';
+
+const tools = await getCollection('tools');
+const flatTools = tools.map(t => ({ slug: t.slug, ...t.data }));
+const categories = [...new Set(flatTools.map(t => t.category))];
+---
+
+<Base title="所有工具 — SoulCreator" description="SoulCreator 的所有工具产品一览，包括浏览器扩展、桌面应用和效率工具。">
+  <div class="page tools-index-header" data-od-id="tools-header">
+    <span class="eyebrow">Product Catalog</span>
+    <h1 style="margin-top: 0.75rem;">
+      所有<span class="gradient-text">工具</span>
+    </h1>
+    <p style="color: var(--muted); margin-top: 0.75rem; max-width: 500px; margin-inline: auto;">
+      从浏览器扩展到桌面应用，找到提升你效率的得力助手。
+    </p>
+
+    <div class="tools-filter">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      {categories.map(cat => (
+        <button class="filter-btn" data-filter={cat}>{cat}</button>
+      ))}
+    </div>
+  </div>
+
+  <section class="section page" data-od-id="tools-list">
+    <div class="tools-grid">
+      {flatTools.map(tool => (
+        <ToolCard {...tool} data-category={tool.category} />
+      ))}
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.tool-card');
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+          cards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Base>
