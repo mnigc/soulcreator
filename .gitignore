@@ -7,6 +7,9 @@ dist/
 # Astro cache
 .astro/
 
+# Kilo local config (not project source)
+.agent/
+
 # OS junk
 .DS_Store
 Thumbs.db
@@ -28,6 +31,10 @@ yarn-error.log*
 .vscode/
 *.swp
 *.swo
+
+# Python cache
+__pycache__/
+*.pyc
 
 # Coverage
 coverage/
