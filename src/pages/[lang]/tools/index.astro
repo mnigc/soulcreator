@@ -1,0 +1,70 @@
+---
+import Base from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t, getToolI18n, localeParams, type Locale } from '../../../i18n';
+import ToolCard from '../../../components/ui/ToolCard.astro';
+
+export async function getStaticPaths() {
+  return localeParams();
+}
+
+const locale = Astro.params.lang as Locale;
+
+const tools = await getCollection('tools');
+const flatTools = tools.map((entry) => {
+  const i18n = getToolI18n(entry.data, entry.slug, locale);
+  return { slug: entry.slug, titleEn: entry.data.titleEn, ...entry.data, ...i18n };
+});
+const categories = [...new Set(flatTools.map((tool) => tool.category))];
+
+const pageTitle = `${t(locale, 'tools.catalog.title')} — SoulCreator`;
+const pageDesc = t(locale, 'tools.catalog.desc');
+---
+
+<Base title={pageTitle} description={pageDesc} locale={locale}>
+  <section class="tools-index-header">
+    <span class="label">{t(locale, 'tools.catalog.label')}</span>
+    <h1 style="margin-top: 0.5rem; font-size: clamp(2.2rem, 5vw, 4rem);">
+      {t(locale, 'tools.catalog.title')}
+    </h1>
+    <p style="color: var(--neutral-600); margin-top: 0.75rem; max-width: 500px; margin-inline: auto; font-size: 0.95rem;">
+      {t(locale, 'tools.catalog.desc')}
+    </p>
+    <div class="tools-filter">
+      <button class="filter-btn active" data-filter="all">{t(locale, 'tools.filterAll')}</button>
+      {categories.map((cat) => (
+        <button class="filter-btn" data-filter={cat}>{cat}</button>
+      ))}
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="tools-list">
+    <div class="tool-grid">
+      {flatTools.map((tool) => <ToolCard {...tool} locale={locale} data-category={tool.category} />)}
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.tool-card');
+
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          btns.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = (btn as HTMLElement).dataset.filter;
+          cards.forEach((card) => {
+            const el = card as HTMLElement;
+            if (filter === 'all' || el.dataset.category === filter) {
+              el.style.display = '';
+            } else {
+              el.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Base>

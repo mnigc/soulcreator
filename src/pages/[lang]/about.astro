@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/BaseLayout.astro';
+import { t, localeParams, type Locale } from '../../i18n';
+
+export async function getStaticPaths() {
+  return localeParams();
+}
+
+const locale = Astro.params.lang as Locale;
+
+const highlights = [
+  { num: '01', titleKey: 'about.h01.title', textKey: 'about.h01.text' },
+  { num: '02', titleKey: 'about.h02.title', textKey: 'about.h02.text' },
+  { num: '03', titleKey: 'about.h03.title', textKey: 'about.h03.text' },
+  { num: '04', titleKey: 'about.h04.title', textKey: 'about.h04.text' },
+];
+
+const tech = [
+  { name: 'Rust', descKey: 'tech.rust' },
+  { name: 'React', descKey: 'tech.react' },
+  { name: 'Tauri', descKey: 'tech.tauri' },
+  { name: 'Astro', descKey: 'tech.astro' },
+];
+
+const pageTitle = `${t(locale, 'about.title1')}${t(locale, 'about.titleAccent')} — SoulCreator`;
+const pageDesc = t(locale, 'about.lede');
+---
+
+<Base title={pageTitle} description={pageDesc} locale={locale}>
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-badge">{t(locale, 'about.badge')}</span>
+        <h1 class="hero-title">
+          {t(locale, 'about.title1')}<br /><span class="accent">{t(locale, 'about.titleAccent')}</span>
+        </h1>
+        <p class="hero-lede">{t(locale, 'about.lede')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="about-content">
+    <div class="section-head">
+      <span class="label">{t(locale, 'about.story.label')}</span>
+      <h2>{t(locale, 'about.story.title')}</h2>
+      <p>{t(locale, 'about.story.desc')}</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p set:html={t(locale, 'about.text1')} />
+        <p set:html={t(locale, 'about.text2')} />
+        <p set:html={t(locale, 'about.text3')} />
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-grid">
+          {highlights.map((h) => (
+            <div class="highlight-item">
+              <span class="highlight-num">{h.num}</span>
+              <span class="highlight-text">
+                <strong>{t(locale, h.titleKey)}</strong><br />
+                {t(locale, h.textKey)}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="tech-stack">
+    <div class="section-head" style="text-align: center;">
+      <span class="label">{t(locale, 'about.tech.label')}</span>
+      <h2>{t(locale, 'about.tech.title')}</h2>
+      <p style="margin-inline: auto;">{t(locale, 'about.tech.desc')}</p>
+    </div>
+    <div class="tech-grid">
+      {tech.map((item) => (
+        <div class="tech-card">
+          <span class="tag">{item.name}</span>
+          <p>{t(locale, item.descKey)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section page" data-od-id="contact">
+    <div class="contact-band">
+      <span class="label">{t(locale, 'about.contact.label')}</span>
+      <h2>{t(locale, 'about.contact.title')}</h2>
+      <p>{t(locale, 'about.contact.desc')}</p>
+      <a href="https://github.com/mnigc" class="btn btn-primary" target="_blank" rel="noopener">
+        {t(locale, 'about.contact.cta')}
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</Base>

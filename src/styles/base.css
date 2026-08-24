@@ -116,6 +116,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav-cta { padding: 0.5rem 1rem; border: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; font-size: 0.75rem; }
 .nav-cta:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
+.lang-switch { position: relative; margin: 0 0.25rem; }
+.lang-current { display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer; padding: 0.4rem 0.6rem; border: 1px solid var(--border); font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: none; user-select: none; }
+.lang-current:hover { color: var(--accent); }
+.lang-menu { position: absolute; top: calc(100% + 0.4rem); right: 0; min-width: 130px; list-style: none; margin: 0; padding: 0.3rem; background: var(--bg); border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.12); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 200; }
+.lang-switch.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.lang-menu li a { display: block; padding: 0.5rem 0.75rem; font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: none; color: var(--fg); }
+.lang-menu li a:hover { background: var(--accent); color: #fff; }
+.lang-menu li a[aria-current="true"] { color: var(--accent); }
+.lang-menu li a[aria-current="true"]:hover { color: #fff; }
+
 /* ─── Hero ─── */
 .hero { padding: clamp(2rem, 5vw, 4rem) 0 clamp(1.5rem, 4vw, 3rem); border-bottom: 2px solid var(--border); }
 .hero-grid { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
@@ -414,4 +424,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
   }
+  .nav-links .lang-switch {
+    margin: 0.5rem auto;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+  .nav-links .lang-menu { position: static; box-shadow: none; border: none; opacity: 1; visibility: visible; transform: none; padding: 0; }
+  .nav-links .lang-current { display: none; }
 }

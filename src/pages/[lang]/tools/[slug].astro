@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/BaseLayout.astro';
+import ToolIcon from '../../../components/ui/ToolIcon.astro';
+import { t, getToolI18n, locales, type Locale } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.flatMap((entry) =>
+    locales.map((lang) => ({
+      params: { lang, slug: entry.slug },
+      props: { entry },
+    }))
+  );
+}
+
+const locale = Astro.params.lang as Locale;
+const { entry } = Astro.props;
+const data = entry.data;
+const i18n = getToolI18n(data, entry.slug, locale);
+const tool = { slug: entry.slug, titleEn: data.titleEn, ...data, ...i18n };
+
+const iconMap: Record<string, string> = {
+  currency: 'currency',
+  medi: 'media',
+  omni: 'markdown',
+  clipboard: 'clipboard',
+};
+const slug = entry.slug;
+const icon = Object.keys(iconMap).find((k) => slug.includes(k))
+  ? iconMap[Object.keys(iconMap).find((k) => slug.includes(k))!]
+  : 'currency';
+
+const subtitle = locale === 'en' ? data.title : data.titleEn;
+---
+
+<script type="application/ld+json">
+  {JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.title,
+    description: tool.description,
+    applicationCategory: tool.category,
+    operatingSystem: tool.platform,
+    offers: { '@type': 'Offer', price: '0' },
+  })}
+</script>
+
+<Base title={`${tool.title} — SoulCreator`} description={tool.description} locale={locale}>
+  <section class="detail-hero page">
+    <div class="detail-hero-grid">
+      <div>
+        <div class="detail-hero-head">
+          <a href={`/${locale}/tools`} class="detail-back" aria-label={t(locale, 'tool.back')}>
+            <ToolIcon name="arrow" size={14} />
+            <span>{t(locale, 'tool.back')}</span>
+          </a>
+          <span class="detail-category">{tool.category}</span>
+        </div>
+        <span class="detail-badge">■ {tool.platform}</span>
+        <h1 class="detail-title">{tool.title}</h1>
+        <p class="detail-title-en">{subtitle}</p>
+        <p class="detail-sub">{tool.description}</p>
+        <div class="detail-tags">
+          {tool.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+        <div class="detail-cta">
+          <a href="https://github.com/mnigc" class="btn btn-primary" target="_blank" rel="noopener">
+            <ToolIcon name="github" size={14} />
+            <span>{t(locale, 'tool.github')}</span>
+          </a>
+          <a href={`/${locale}/tools`} class="btn btn-outline">
+            <ToolIcon name="arrow" size={14} />
+            <span>{t(locale, 'tools.viewAll')}</span>
+          </a>
+        </div>
+      </div>
+      <div class="detail-hero-icon">
+        <div class="detail-icon-badge">
+          <ToolIcon name={icon} size={48} />
+        </div>
+        <span class="detail-icon-label">{t(locale, 'tool.product')}</span>
+      </div>
+    </div>
+  </section>
+
+  {tool.stats && tool.stats.length > 0 && (
+    <section class="section page" data-od-id="tool-stats">
+      <div class="section-head">
+        <span class="label">{t(locale, 'tool.stats.label')}</span>
+        <h2>{t(locale, 'tool.stats.title')}</h2>
+        <p>{t(locale, 'tool.stats.desc')}</p>
+      </div>
+      <div class="stats-grid">
+        {tool.stats.map((item) => (
+          <div class="stats-cell">
+            <span class="stats-label">{item.label}</span>
+            <span class="stats-value">{item.value}</span>
+            <span class="stats-sub">▲ {item.sub}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {tool.features && tool.features.length > 0 && (
+    <section class="section page" data-od-id="tool-features">
+      <div class="section-head">
+        <span class="label">{t(locale, 'tool.features.label')}</span>
+        <h2>{t(locale, 'tool.features.title')}</h2>
+        <p>{t(locale, 'tool.features.desc')}</p>
+      </div>
+      <div class="feature-grid">
+        {tool.features.map((feat, i) => (
+          <div class="feature-card">
+            <div class="feature-num">0{i + 1}</div>
+            <h4 class="feature-title">{feat.title}</h4>
+            <p class="feature-text">{feat.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {tool.faq && tool.faq.length > 0 && (
+    <section class="section page" data-od-id="tool-faq">
+      <div class="section-head" style="text-align: center;">
+        <span class="label">{t(locale, 'tool.faq.label')}</span>
+        <h2>{t(locale, 'tool.faq.title')}</h2>
+        <p style="margin-inline: auto;">{t(locale, 'tool.faq.desc')}</p>
+      </div>
+      <div class="faq-grid">
+        {tool.faq.map((item) => (
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span>{item.q}</span>
+              <span class="plus">+</span>
+            </button>
+            <div class="faq-a-wrap">
+              <div class="faq-a">
+                <p>{item.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <script>
+        document.querySelectorAll('.faq-q').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var item = btn.closest('.faq-item');
+            var open = item.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+        });
+      </script>
+    </section>
+  )}
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <section class="section page" data-od-id="tool-back">
+    <div style="text-align: center;">
+      <span class="label">{t(locale, 'tool.next.label')}</span>
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); margin: 0.5rem 0;">{t(locale, 'tool.next.title')}</h2>
+      <p style="color: var(--neutral-600); max-width: 480px; margin: 0.5rem auto 1.25rem; font-size: 0.9rem;">
+        {t(locale, 'tool.next.desc')}
+      </p>
+      <a href={`/${locale}/tools`} class="btn btn-primary">
+        <ToolIcon name="arrow" size={14} />
+        <span>{t(locale, 'tools.viewAll')}</span>
+      </a>
+    </div>
+  </section>
+</Base>

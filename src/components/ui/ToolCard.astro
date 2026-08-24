@@ -1,15 +1,18 @@
 ---
 import ToolIcon from './ToolIcon.astro';
 import type { ToolData } from '../props';
+import type { Locale } from '../../i18n';
 
 type Props = ToolData & {
   maxTags?: number;
   className?: string;
+  locale?: Locale;
 };
 
-const { slug, title, titleEn, description, tags = [], platform, maxTags = 3, className = '' } = Astro.props;
+const { slug, title, titleEn, description, tags = [], platform, maxTags = 3, className = '', locale = 'zh' } = Astro.props;
 
 const category = Astro.props.dataCategory as string | undefined;
+const href = `/${locale}/tools/${slug}`;
 
 const iconMap: Record<string, string> = {
   currency: 'currency',
@@ -28,7 +31,7 @@ const icon = Object.keys(iconMap).find(k => slug.includes(k))
   data-od-id={`tool-card-${slug}`}
   data-category={category || ''}
 >
-  <a href={`/tools/${slug}`} class="tool-card-link" aria-label={`查看 ${title}`}></a>
+  <a href={href} class="tool-card-link" aria-label={title}></a>
   <div class="tool-card-content">
     <div class="tool-card-head">
       <div class="tool-icon">
