@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../../../layouts/BaseLayout.astro';
 import ToolIcon from '../../../components/ui/ToolIcon.astro';
+import FaqItem from '../../../components/ui/FaqItem.astro';
+import { getIconBySlug } from '../../../components/ui/iconMap';
 import { t, getToolI18n, locales, type Locale } from '../../../i18n';
 
 export async function getStaticPaths() {
@@ -19,17 +21,8 @@ const { entry } = Astro.props;
 const data = entry.data;
 const i18n = getToolI18n(data, entry.slug, locale);
 const tool = { slug: entry.slug, titleEn: data.titleEn, ...data, ...i18n };
-
-const iconMap: Record<string, string> = {
-  currency: 'currency',
-  medi: 'media',
-  omni: 'markdown',
-  clipboard: 'clipboard',
-};
 const slug = entry.slug;
-const icon = Object.keys(iconMap).find((k) => slug.includes(k))
-  ? iconMap[Object.keys(iconMap).find((k) => slug.includes(k))!]
-  : 'currency';
+const icon = getIconBySlug(slug);
 
 const subtitle = locale === 'en' ? data.title : data.titleEn;
 ---
@@ -131,28 +124,9 @@ const subtitle = locale === 'en' ? data.title : data.titleEn;
       </div>
       <div class="faq-grid">
         {tool.faq.map((item) => (
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              <span>{item.q}</span>
-              <span class="plus">+</span>
-            </button>
-            <div class="faq-a-wrap">
-              <div class="faq-a">
-                <p>{item.a}</p>
-              </div>
-            </div>
-          </div>
+          <FaqItem q={item.q} a={item.a} />
         ))}
       </div>
-      <script>
-        document.querySelectorAll('.faq-q').forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var item = btn.closest('.faq-item');
-            var open = item.classList.toggle('open');
-            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          });
-        });
-      </script>
     </section>
   )}
 

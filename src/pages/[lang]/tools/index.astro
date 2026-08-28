@@ -38,6 +38,10 @@ const pageDesc = t(locale, 'tools.catalog.desc');
     </div>
   </section>
 
+  <noscript>
+    <style>.tools-filter { display: none !important; }</style>
+  </noscript>
+
   <section class="section page" data-od-id="tools-list">
     <div class="tool-grid">
       {flatTools.map((tool) => <ToolCard {...tool} locale={locale} data-category={tool.category} />)}

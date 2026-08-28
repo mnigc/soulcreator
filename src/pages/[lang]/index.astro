@@ -3,6 +3,7 @@ import Base from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { t, getToolI18n, toolOrder, localeParams, type Locale } from '../../i18n';
 import ToolCard from '../../components/ui/ToolCard.astro';
+import FaqItem from '../../components/ui/FaqItem.astro';
 
 export async function getStaticPaths() {
   return localeParams();
@@ -141,26 +142,8 @@ const pageDesc = t(locale, 'hero.lede');
     </div>
     <div class="faq-list">
       {faqs.map((item) => (
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>{item.q}</span>
-            <span class="plus">+</span>
-          </button>
-          <div class="faq-a-wrap">
-            <div class="faq-a"><p>{item.a}</p></div>
-          </div>
-        </div>
+        <FaqItem q={item.q} a={item.a} />
       ))}
     </div>
   </section>
-
-  <script>
-    document.querySelectorAll('.faq-q').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var item = btn.closest('.faq-item');
-        var open = item.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    });
-  </script>
 </Base>

@@ -1,6 +1,6 @@
 ---
 import '../styles/base.css';
-import { t, getTicker, htmlLang, ogLocale, locales, localeNames, defaultLocale, type Locale } from '../i18n';
+import { t, htmlLang, ogLocale, locales, localeNames, defaultLocale, type Locale } from '../i18n';
 
 interface Props {
   title: string;
@@ -11,8 +11,8 @@ interface Props {
 const { title, description = 'SoulCreator — 独立开发者的效率工具集合', locale = defaultLocale } = Astro.props;
 
 const now = new Date();
-
-const tickerItems = getTicker(locale);
+const canonicalUrl = `https://soulcreator.com${Astro.url.pathname}`;
+const ogImage = 'https://soulcreator.com/og-image.png';
 
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 const currentIsLocale = pathSegments.length > 0 && (locales as string[]).includes(pathSegments[0]);
@@ -22,7 +22,6 @@ const swapLocale = (target: string) => '/' + [target, ...baseSegments].join('/')
 const navLinks = [
   { href: `/${locale}/tools`, key: 'nav.tools' },
   { href: `/${locale}/about`, key: 'nav.about' },
-  { href: 'https://github.com/mnigc#readme', key: 'nav.docs', external: true },
 ];
 ---
 
@@ -36,6 +35,13 @@ const navLinks = [
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={ogLocale[locale]} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <script is:inline>
@@ -117,30 +123,11 @@ const navLinks = [
       </div>
     </nav>
 
-    <main id="content">
-      <slot />
-    </main>
+<main id="content">
+  <slot />
+</main>
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        {tickerItems.map(item => (
-          <span>
-            <i class="dot"></i>
-            {item.text}
-            {item.badge && <span class="badge">▲ {item.badge}</span>}
-          </span>
-        ))}
-        {tickerItems.map(item => (
-          <span>
-            <i class="dot"></i>
-            {item.text}
-            {item.badge && <span class="badge">▲ {item.badge}</span>}
-          </span>
-        ))}
-      </div>
-    </div>
-
-    <footer class="footer">
+<footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand">
           <span class="brand-mark"></span>
@@ -197,12 +184,44 @@ const navLinks = [
         });
 
         var menuToggle = document.querySelector('.menu-toggle');
-        if (menuToggle) {
+        var navLinks = document.querySelector('.nav-links');
+        if (menuToggle && navLinks) {
           menuToggle.addEventListener('click', function () {
             var expanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', String(!expanded));
-            var links = document.querySelector('.nav-links');
-            if (links) links.classList.toggle('open');
+            navLinks.classList.toggle('open');
+            if (navLinks.classList.contains('open')) {
+              var firstLink = navLinks.querySelector('a, button');
+              if (firstLink) firstLink.focus();
+            } else {
+              menuToggle.focus();
+            }
+          });
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+              navLinks.classList.remove('open');
+              menuToggle.setAttribute('aria-expanded', 'false');
+              menuToggle.focus();
+            }
+          });
+          navLinks.addEventListener('keydown', function (e) {
+            if (e.key === 'Tab' && navLinks.classList.contains('open')) {
+              var focusable = navLinks.querySelectorAll('a[href], button:not([disabled])');
+              if (focusable.length === 0) return;
+              var first = focusable[0];
+              var last = focusable[focusable.length - 1];
+              if (e.shiftKey) {
+                if (document.activeElement === first) {
+                  e.preventDefault();
+                  last.focus();
+                }
+              } else {
+                if (document.activeElement === last) {
+                  e.preventDefault();
+                  first.focus();
+                }
+              }
+            }
           });
         }
 
@@ -225,6 +244,15 @@ const navLinks = [
         document.addEventListener('click', function () {
           var sw = document.querySelector('.lang-switch');
           if (sw) sw.classList.remove('open');
+        });
+
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('.faq-q');
+          if (btn) {
+            var item = btn.closest('.faq-item');
+            var open = item.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          }
         });
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {

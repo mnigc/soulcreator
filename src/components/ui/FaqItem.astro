@@ -1,0 +1,13 @@
+---
+const { q, a } = Astro.props;
+---
+
+<div class="faq-item">
+  <button class="faq-q" aria-expanded="false">
+    <span>{q}</span>
+    <span class="plus">+</span>
+  </button>
+  <div class="faq-a-wrap">
+    <div class="faq-a"><p>{a}</p></div>
+  </div>
+</div>
