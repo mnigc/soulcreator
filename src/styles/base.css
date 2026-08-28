@@ -179,7 +179,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ─── Hero ─── */
 .hero {
   position: relative;
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 4rem);
   border-bottom: none;
   overflow: hidden;
 }
@@ -395,7 +395,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ─── Footer ─── */
 .footer {
-  padding: 2.5rem 0 2rem;
+  padding-block: 2.5rem 2rem;
   border-top: 1px solid var(--border);
   margin-top: auto;
 }
@@ -445,7 +445,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ─── Detail Page ─── */
 .detail-hero {
-  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+  padding-block: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 4vw, 3rem);
   border-bottom: none;
 }
 .detail-hero-grid {
@@ -611,7 +611,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ─── 404 Page ─── */
 .hero-404 {
-  padding: clamp(4rem, 10vw, 8rem) 0; text-align: center;
+  padding-block: clamp(4rem, 10vw, 8rem);
+  text-align: center;
   border-bottom: none;
 }
 .hero-404 .hero-badge { background: var(--accent); }
