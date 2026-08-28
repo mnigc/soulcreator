@@ -23,20 +23,20 @@ const icon = getIconBySlug(slug);
   data-category={category || ''}
 >
   <a href={href} class="tool-card-link" aria-label={title}></a>
-  <div class="tool-card-content">
-    <div class="tool-card-head">
-      <div class="tool-icon">
-        <ToolIcon name={icon} size={24} />
-      </div>
-      <span class="tool-platform-tag">{platform}</span>
+<div class="tool-card-content">
+  <div class="tool-card-head">
+    <div class="tool-icon">
+      <ToolIcon name={icon} size={28} />
     </div>
-    <div>
-      <h3 class="tool-title">{title}</h3>
-      <p class="tool-title-en">{titleEn}</p>
-    </div>
-    <p class="tool-desc">{description}</p>
-    <div class="tool-tags">
-      {tags.slice(0, maxTags).map(tag => <span class="tag">{tag}</span>)}
-    </div>
+    <span class="tool-platform-tag">{platform}</span>
   </div>
+  <div>
+    <h3 class="tool-title">{title}</h3>
+    <p class="tool-title-en">{titleEn}</p>
+  </div>
+  <p class="tool-desc">{description}</p>
+  <div class="tool-tags">
+    {tags.slice(0, maxTags).map(tag => <span class="tag">{tag}</span>)}
+  </div>
+</div>
 </div>

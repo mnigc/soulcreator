@@ -27,17 +27,17 @@ const pageDesc = t(locale, 'about.lede');
 ---
 
 <Base title={pageTitle} description={pageDesc} locale={locale}>
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <span class="hero-badge">{t(locale, 'about.badge')}</span>
-        <h1 class="hero-title">
-          {t(locale, 'about.title1')}<br /><span class="accent">{t(locale, 'about.titleAccent')}</span>
-        </h1>
-        <p class="hero-lede">{t(locale, 'about.lede')}</p>
-      </div>
-    </div>
-  </section>
+   <section class="hero">
+     <canvas class="hero-particles" aria-hidden="true"></canvas>
+     <div class="hero-grid">
+       <span class="hero-badge">{t(locale, 'about.badge')}</span>
+       <h1 class="hero-title">
+         {t(locale, 'about.title1')}<br /><span class="accent">{t(locale, 'about.titleAccent')}</span>
+       </h1>
+       <p class="hero-lede">{t(locale, 'about.lede')}</p>
+     </div>
+     <div class="hero-scroll-hint" aria-hidden="true"></div>
+   </section>
 
   <section class="section page" data-od-id="about-content">
     <div class="section-head">

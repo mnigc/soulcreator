@@ -129,20 +129,4 @@ const subtitle = locale === 'en' ? data.title : data.titleEn;
       </div>
     </section>
   )}
-
-  <div class="ornament">✦ ✦ ✦</div>
-
-  <section class="section page" data-od-id="tool-back">
-    <div style="text-align: center;">
-      <span class="label">{t(locale, 'tool.next.label')}</span>
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); margin: 0.5rem 0;">{t(locale, 'tool.next.title')}</h2>
-      <p style="color: var(--neutral-600); max-width: 480px; margin: 0.5rem auto 1.25rem; font-size: 0.9rem;">
-        {t(locale, 'tool.next.desc')}
-      </p>
-      <a href={`/${locale}/tools`} class="btn btn-primary">
-        <ToolIcon name="arrow" size={14} />
-        <span>{t(locale, 'tools.viewAll')}</span>
-      </a>
-    </div>
-  </section>
 </Base>

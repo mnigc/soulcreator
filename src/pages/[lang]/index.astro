@@ -19,25 +19,6 @@ const localizedTools = tools.map((entry) => {
 const ordered = toolOrder
   .map((slug) => localizedTools.find((tool) => tool.slug === slug))
   .filter(Boolean);
-const featuredTools = ordered.slice(0, 4);
-
-const statsItems = [
-  { label: t(locale, 'stats.published'), num: '04', sub: t(locale, 'stats.publishedSub') },
-  { label: t(locale, 'stats.free'), num: '∞', sub: t(locale, 'stats.freeSub') },
-  { label: t(locale, 'stats.license'), num: 'MIT', sub: t(locale, 'stats.licenseSub') },
-  { label: t(locale, 'stats.dev'), num: '01', sub: t(locale, 'stats.devSub') },
-];
-
-const compareRows = [
-  { feature: t(locale, 'compare.browseext'), values: ['✓', '–', '–', '–'] },
-  { feature: t(locale, 'compare.desktop'), values: ['–', '✓', '✓', '✓'] },
-  { feature: t(locale, 'compare.local'), values: ['✓', '✓', '✓', '✓'] },
-  { feature: t(locale, 'compare.free'), values: ['✓', '✓', '✓', '✓'] },
-  { feature: t(locale, 'compare.oss'), values: ['✓', '✓', '✓', '✓'] },
-  { feature: t(locale, 'compare.batch'), values: ['–', '✓', '✓', '✓'] },
-];
-
-const compareHeaders = [t(locale, 'compare.capability'), ...featuredTools.map((tool) => tool.title)];
 
 const faqs = [1, 2, 3, 4].map((i) => ({
   q: t(locale, `faq${i}.q`),
@@ -49,46 +30,28 @@ const pageDesc = t(locale, 'hero.lede');
 ---
 
 <Base title={pageTitle} description={pageDesc} locale={locale}>
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <span class="hero-badge">{t(locale, 'hero.badge')}</span>
-        <h1 class="hero-title">
-          {t(locale, 'hero.title1')}<br /><span class="accent">{t(locale, 'hero.titleAccent')}</span>
-        </h1>
-        <p class="hero-lede">{t(locale, 'hero.lede')}</p>
-        <div class="hero-cta">
-          <a href={`/${locale}/tools`} class="btn btn-primary">
-            {t(locale, 'hero.ctaBrowse')}
-            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </a>
-          <a href="https://github.com/mnigc" class="btn btn-outline" target="_blank" rel="noopener">
-            {t(locale, 'hero.ctaGithub')}
-          </a>
-        </div>
-        <p class="hero-note">{t(locale, 'hero.note')}</p>
-      </div>
-
-      <aside class="hero-aside">
-        <div class="stats-panel">
-          <div class="stats-panel-header">Market Watch</div>
-          <div class="stats-panel-body">
-            {statsItems.map((item) => (
-              <div class="stat-item">
-                <span class="stat-label">{item.label}</span>
-                <span class="stat-value">
-                  <span class="stat-num">{item.num}</span>
-                  <span class="stat-sub">▲ {item.sub}</span>
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </aside>
-    </div>
-  </section>
+   <section class="hero">
+     <canvas class="hero-particles" aria-hidden="true"></canvas>
+     <div class="hero-grid">
+       <span class="hero-badge">{t(locale, 'hero.badge')}</span>
+       <h1 class="hero-title">
+         {t(locale, 'hero.title1')}<br /><span class="accent">{t(locale, 'hero.titleAccent')}</span>
+       </h1>
+       <p class="hero-lede">{t(locale, 'hero.lede')}</p>
+       <div class="hero-cta">
+         <a href={`/${locale}/tools`} class="btn btn-primary">
+           {t(locale, 'hero.ctaBrowse')}
+           <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+             <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+           </svg>
+         </a>
+         <a href="https://github.com/mnigc" class="btn btn-outline" target="_blank" rel="noopener">
+           {t(locale, 'hero.ctaGithub')}
+         </a>
+       </div>
+     </div>
+     <div class="hero-scroll-hint" aria-hidden="true"></div>
+   </section>
 
   <section class="section page" data-od-id="featured-tools">
     <div class="section-head">
@@ -97,40 +60,7 @@ const pageDesc = t(locale, 'hero.lede');
       <p>{t(locale, 'sec.tools.desc')}</p>
     </div>
     <div class="tool-grid">
-      {featuredTools.map((tool) => <ToolCard {...tool} locale={locale} />)}
-    </div>
-    <div style="margin-top: 2rem; text-align: center;">
-      <a href={`/${locale}/tools`} class="btn btn-ghost">
-        {t(locale, 'tools.viewAll')}
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <section class="section page" data-od-id="compare">
-    <div class="section-head">
-      <span class="label">{t(locale, 'sec.compare.label')}</span>
-      <h2>{t(locale, 'sec.compare.title')}</h2>
-      <p>{t(locale, 'sec.compare.desc')}</p>
-    </div>
-    <div class="compare-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            {compareHeaders.map((header) => <th>{header}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {compareRows.map((row) => (
-            <tr>
-              <th>{row.feature}</th>
-              {row.values.map((v) => <td class={v === '✓' ? 'compare-yes' : 'compare-no'}>{v}</td>)}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {ordered.map((tool) => <ToolCard {...tool} locale={locale} />)}
     </div>
   </section>
 
