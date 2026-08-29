@@ -1,6 +1,11 @@
 name = "soulcreator"
 compatibility_date = "2024-11-01"
-pages_build_output_dir = "dist"
+main = "src/worker.ts"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "none"
 
 [[d1_databases]]
 binding = "DB"
