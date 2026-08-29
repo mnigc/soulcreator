@@ -13,7 +13,7 @@ const locale = Astro.params.lang as Locale;
 const tools = await getCollection('tools');
 const flatTools = tools.map((entry) => {
   const i18n = getToolI18n(entry.data, entry.slug, locale);
-  return { slug: entry.slug, titleEn: entry.data.titleEn, ...entry.data, ...i18n };
+  return { slug: entry.slug, ...entry.data, ...i18n };
 });
 const categories = [...new Set(flatTools.map((tool) => tool.category))];
 

@@ -14,8 +14,7 @@ const zh: Dict = {
   'theme.dark': '深色模式',
   'theme.auto': '跟随系统',
 
-  'footer.edition': 'Edition: Vol. 1.0',
-  'footer.madeBy': 'Made by a human',
+  'footer.visits': '累计访问',
 
   'hero.badge': '■ 独立开发 · 每日更新',
   'hero.title1': '我做的几个',
@@ -147,8 +146,7 @@ const en: Dict = {
   'theme.dark': 'Dark',
   'theme.auto': 'System',
 
-  'footer.edition': 'Edition: Vol. 1.0',
-  'footer.madeBy': 'Made by a human',
+  'footer.visits': 'Total visits',
 
   'hero.badge': '■ Indie Dev · Daily Updates',
   'hero.title1': 'A few',
@@ -280,8 +278,7 @@ const ko: Dict = {
   'theme.dark': '다크',
   'theme.auto': '시스템',
 
-  'footer.edition': 'Edition: Vol. 1.0',
-  'footer.madeBy': 'Made by a human',
+  'footer.visits': '누적 방문',
 
   'hero.badge': '■ 개인 개발 · 매일 업데이트',
   'hero.title1': '제가 만든',
@@ -413,8 +410,7 @@ const ja: Dict = {
   'theme.dark': 'ダーク',
   'theme.auto': 'システム',
 
-  'footer.edition': 'Edition: Vol. 1.0',
-  'footer.madeBy': 'Made by a human',
+  'footer.visits': '累計アクセス',
 
   'hero.badge': '■ 個人開発 · 毎日更新',
   'hero.title1': '作った',

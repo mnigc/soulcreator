@@ -20,11 +20,9 @@ const locale = Astro.params.lang as Locale;
 const { entry } = Astro.props;
 const data = entry.data;
 const i18n = getToolI18n(data, entry.slug, locale);
-const tool = { slug: entry.slug, titleEn: data.titleEn, ...data, ...i18n };
+const tool = { slug: entry.slug, ...data, ...i18n };
 const slug = entry.slug;
 const icon = getIconBySlug(slug);
-
-const subtitle = locale === 'en' ? data.title : data.titleEn;
 ---
 
 <script type="application/ld+json">
@@ -52,7 +50,6 @@ const subtitle = locale === 'en' ? data.title : data.titleEn;
         </div>
         <span class="detail-badge">■ {tool.platform}</span>
         <h1 class="detail-title">{tool.title}</h1>
-        <p class="detail-title-en">{subtitle}</p>
         <p class="detail-sub">{tool.description}</p>
         <div class="detail-tags">
           {tool.tags.map((tag) => <span class="tag">{tag}</span>)}

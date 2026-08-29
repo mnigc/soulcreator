@@ -14,7 +14,7 @@ const locale = Astro.params.lang as Locale;
 const tools = await getCollection('tools');
 const localizedTools = tools.map((entry) => {
   const i18n = getToolI18n(entry.data, entry.slug, locale);
-  return { slug: entry.slug, titleEn: entry.data.titleEn, ...entry.data, ...i18n };
+  return { slug: entry.slug, ...entry.data, ...i18n };
 });
 const ordered = toolOrder
   .map((slug) => localizedTools.find((tool) => tool.slug === slug))
@@ -33,21 +33,35 @@ const pageDesc = t(locale, 'hero.lede');
    <section class="hero">
      <canvas class="hero-particles" aria-hidden="true"></canvas>
      <div class="hero-grid">
-       <span class="hero-badge">{t(locale, 'hero.badge')}</span>
-       <h1 class="hero-title">
-         {t(locale, 'hero.title1')}<br /><span class="accent">{t(locale, 'hero.titleAccent')}</span>
-       </h1>
-       <p class="hero-lede">{t(locale, 'hero.lede')}</p>
-       <div class="hero-cta">
-         <a href={`/${locale}/tools`} class="btn btn-primary">
-           {t(locale, 'hero.ctaBrowse')}
-           <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-             <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-         </a>
-         <a href="https://github.com/mnigc" class="btn btn-outline" target="_blank" rel="noopener">
-           {t(locale, 'hero.ctaGithub')}
-         </a>
+       <div class="hero-text">
+         <span class="hero-badge">{t(locale, 'hero.badge')}</span>
+         <h1 class="hero-title">
+           {t(locale, 'hero.title1')}<br /><span class="accent">{t(locale, 'hero.titleAccent')}</span>
+         </h1>
+         <p class="hero-lede">{t(locale, 'hero.lede')}</p>
+         <div class="hero-cta">
+           <a href={`/${locale}/tools`} class="btn btn-primary">
+             {t(locale, 'hero.ctaBrowse')}
+             <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+               <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+             </svg>
+           </a>
+           <a href="https://github.com/mnigc" class="btn btn-outline" target="_blank" rel="noopener">
+             {t(locale, 'hero.ctaGithub')}
+           </a>
+         </div>
+       </div>
+       <div class="hero-visual" aria-hidden="true">
+         <div class="hero-3d">
+           <div class="shape shape-cube">
+             <div class="face cf1"></div>
+             <div class="face cf2"></div>
+             <div class="face cf3"></div>
+             <div class="face cf4"></div>
+             <div class="face cf5"></div>
+             <div class="face cf6"></div>
+           </div>
+         </div>
        </div>
      </div>
      <div class="hero-scroll-hint" aria-hidden="true"></div>

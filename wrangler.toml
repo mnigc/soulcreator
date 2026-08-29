@@ -1,0 +1,8 @@
+name = "soulcreator"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "soulcreator-visits"
+database_id = "51b9d33a-2a71-4266-9e23-7ffdd9a18021"

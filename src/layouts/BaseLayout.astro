@@ -139,7 +139,10 @@ const navLinks = [
           <li><a href="https://github.com/mnigc" target="_blank" rel="noopener">{t(locale, 'nav.github')}</a></li>
         </ul>
         <p class="footer-colophon">
-          {t(locale, 'footer.edition')} &middot; {t(locale, 'footer.madeBy')} &middot; &copy; {now.getFullYear()}
+          <span class="footer-visits">
+            {t(locale, 'footer.visits')}: <span class="footer-visits-num" data-visits>—</span>
+          </span>
+          &middot; &copy; {now.getFullYear()}
         </p>
       </div>
     </footer>
@@ -351,6 +354,105 @@ const navLinks = [
          });
          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
        })();
-     </script>
+
+       /* ─── Hero 3D Parallax ─── */
+       (function () {
+         var visual = document.querySelector('.hero-visual');
+         var d3 = document.querySelector('.hero-3d');
+         if (!visual || !d3) return;
+
+         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         if (reduceMotion) {
+           d3.style.animation = 'none';
+           return;
+         }
+
+         var targetX = 0, targetY = 0;
+         var currentX = 0, currentY = 0;
+         var baseRX = -18, baseRY = 28;
+         var rafId = null;
+
+         function onMove(e) {
+           var rect = visual.getBoundingClientRect();
+           var cx = rect.left + rect.width / 2;
+           var cy = rect.top + rect.height / 2;
+           var dx = (e.clientX - cx) / (rect.width / 2);
+           var dy = (e.clientY - cy) / (rect.height / 2);
+           targetX = Math.max(-1, Math.min(1, dx));
+           targetY = Math.max(-1, Math.min(1, dy));
+         }
+
+         function tick() {
+           currentX += (targetX - currentX) * 0.08;
+           currentY += (targetY - currentY) * 0.08;
+           var px = currentX * 14;
+           var py = currentY * 12;
+           d3.style.setProperty('--parallax-x', px + 'deg');
+           d3.style.setProperty('--parallax-y', py + 'deg');
+           rafId = requestAnimationFrame(tick);
+         }
+
+         function start() {
+           if (rafId) return;
+           tick();
+         }
+         function stop() {
+           if (rafId) {
+             cancelAnimationFrame(rafId);
+             rafId = null;
+           }
+         }
+
+         if (document.documentElement.getAttribute('data-theme') === 'light' || true) {
+           window.addEventListener('mousemove', onMove, { passive: true });
+           var io = new IntersectionObserver(function (entries) {
+             entries.forEach(function (entry) {
+               if (entry.isIntersecting) start(); else stop();
+             });
+           });
+           io.observe(visual);
+         }
+
+          window.addEventListener('mouseleave', function () {
+            targetX = 0; targetY = 0;
+          });
+        })();
+
+        /* ─── Visit counter ─── */
+        (function () {
+          var el = document.querySelector('[data-visits]');
+          if (!el) return;
+
+          function format(n) {
+            if (n < 1000) return String(n);
+            if (n < 10000) return n.toLocaleString('en-US');
+            return n.toLocaleString('en-US');
+          }
+
+          function read() {
+            fetch('/api/visits', { credentials: 'omit', cache: 'no-store' })
+              .then(function (r) { return r.ok ? r.json() : null; })
+              .then(function (d) { if (d && typeof d.total === 'number') el.textContent = format(d.total); })
+              .catch(function () {});
+          }
+
+          function ping() {
+            var key = 'sc-visit-' + new Date().toISOString().slice(0, 10);
+            try {
+              if (sessionStorage.getItem(key)) { read(); return; }
+              sessionStorage.setItem(key, '1');
+            } catch (e) { /* ignore */ }
+            fetch('/api/visit', { method: 'POST', credentials: 'omit', keepalive: true })
+              .then(read)
+              .catch(function () {});
+          }
+
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(ping, { timeout: 1500 });
+          } else {
+            setTimeout(ping, 800);
+          }
+        })();
+      </script>
    </body>
 </html>
