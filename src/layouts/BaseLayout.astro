@@ -8,11 +8,12 @@ interface Props {
   locale?: Locale;
 }
 
-const { title, description = 'SoulCreator — 独立开发者的效率工具集合', locale = defaultLocale } = Astro.props;
+const { title, description, locale = defaultLocale } = Astro.props;
 
 const now = new Date();
-const canonicalUrl = `https://soulcreator.com${Astro.url.pathname}`;
-const ogImage = 'https://soulcreator.com/og-image.png';
+const canonicalUrl = `https://soulcreator.cn${Astro.url.pathname}`;
+const ogImage = 'https://soulcreator.cn/og-image.png';
+const pageDesc = description ?? t(locale, 'meta.desc');
 
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 const currentIsLocale = pathSegments.length > 0 && (locales as string[]).includes(pathSegments[0]);
@@ -30,18 +31,24 @@ const navLinks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDesc} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={pageDesc} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={ogLocale[locale]} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={pageDesc} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAFA" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0A" />
     <link rel="canonical" href={canonicalUrl} />
+    {locales.map((l) => (
+      <link rel="alternate" hreflang={l} href={`https://soulcreator.cn${swapLocale(l)}/`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`https://soulcreator.cn${swapLocale(defaultLocale)}/`} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <script is:inline>
@@ -302,6 +309,8 @@ const navLinks = [
            }
          }
 
+         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
          function draw() {
            var w = canvas.offsetWidth;
            var h = canvas.offsetHeight;
@@ -335,19 +344,22 @@ const navLinks = [
                }
              }
            }
-           animId = requestAnimationFrame(draw);
+           if (!reduceMotion) {
+             animId = requestAnimationFrame(draw);
+           }
          }
 
          init();
          draw();
 
-         var resizeTimer;
-         window.addEventListener('resize', function () {
-           clearTimeout(resizeTimer);
-           resizeTimer = setTimeout(function () {
-             init();
-           }, 200);
-         });
+          var resizeTimer;
+          window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+              init();
+              if (reduceMotion) draw();
+            }, 200);
+          });
 
          var observer = new MutationObserver(function () {
            // Theme changed, colors will update on next frame
@@ -403,15 +415,13 @@ const navLinks = [
            }
          }
 
-         if (document.documentElement.getAttribute('data-theme') === 'light' || true) {
-           window.addEventListener('mousemove', onMove, { passive: true });
-           var io = new IntersectionObserver(function (entries) {
-             entries.forEach(function (entry) {
-               if (entry.isIntersecting) start(); else stop();
-             });
-           });
-           io.observe(visual);
-         }
+          window.addEventListener('mousemove', onMove, { passive: true });
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) start(); else stop();
+            });
+          });
+          io.observe(visual);
 
           window.addEventListener('mouseleave', function () {
             targetX = 0; targetY = 0;
@@ -424,8 +434,6 @@ const navLinks = [
           if (!el) return;
 
           function format(n) {
-            if (n < 1000) return String(n);
-            if (n < 10000) return n.toLocaleString('en-US');
             return n.toLocaleString('en-US');
           }
 

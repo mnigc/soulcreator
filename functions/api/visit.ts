@@ -13,11 +13,8 @@ const json = (body: unknown, status = 200): Response =>
 
 export const onRequestPost: PagesFunction<Env> = async ({ env }) => {
   try {
-    await env.DB.prepare(
-      "INSERT OR IGNORE INTO visit_counter (id, total) VALUES (1, 0)"
-    ).run();
     const row = await env.DB.prepare(
-      "UPDATE visit_counter SET total = total + 1 WHERE id = 1 RETURNING total"
+      "INSERT INTO visit_counter (id, total) VALUES (1, 1) ON CONFLICT(id) DO UPDATE SET total = total + 1 RETURNING total"
     ).first<{ total: number }>();
     return json({ total: row?.total ?? 1 });
   } catch (err) {

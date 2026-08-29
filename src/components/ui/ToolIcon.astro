@@ -29,6 +29,5 @@ const icons: Record<string, string> = {
   stroke-width={stroke}
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
->
-  {icons[name] || icons.currency}
-</svg>
+  set:html={icons[name] || icons.currency}
+></svg>

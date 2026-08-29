@@ -15,6 +15,7 @@ const zh: Dict = {
   'theme.auto': '跟随系统',
 
   'footer.visits': '累计访问',
+  'meta.desc': 'SoulCreator — 独立开发者的效率工具集合',
 
   'hero.badge': '■ 独立开发 · 每日更新',
   'hero.title1': '我做的几个',
@@ -147,6 +148,7 @@ const en: Dict = {
   'theme.auto': 'System',
 
   'footer.visits': 'Total visits',
+  'meta.desc': 'SoulCreator — a collection of small productivity tools, free and open source.',
 
   'hero.badge': '■ Indie Dev · Daily Updates',
   'hero.title1': 'A few',
@@ -279,6 +281,7 @@ const ko: Dict = {
   'theme.auto': '시스템',
 
   'footer.visits': '누적 방문',
+  'meta.desc': 'SoulCreator — 개인 개발자를 위한 작은 생산성 도구 모음, 무료 및 오픈소스.',
 
   'hero.badge': '■ 개인 개발 · 매일 업데이트',
   'hero.title1': '제가 만든',
@@ -411,6 +414,7 @@ const ja: Dict = {
   'theme.auto': 'システム',
 
   'footer.visits': '累計アクセス',
+  'meta.desc': 'SoulCreator — 個人開発者のための小さな生産性ツール集。無料でオープンソース。',
 
   'hero.badge': '■ 個人開発 · 毎日更新',
   'hero.title1': '作った',

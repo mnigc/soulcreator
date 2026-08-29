@@ -9,9 +9,10 @@ const detectedLocale = pathSegments.length > 0 && (locales as string[]).includes
 
 const locale = detectedLocale;
 const pageTitle = `${t(locale, 'notfound.title1')}${t(locale, 'notfound.titleAccent')}${t(locale, 'notfound.title2')} — SoulCreator`;
+const pageDesc = t(locale, 'notfound.desc');
 ---
 
-<Base title={pageTitle} locale={locale}>
+<Base title={pageTitle} description={pageDesc} locale={locale}>
   <section class="hero-404">
     <div class="page" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
       <span class="hero-badge">{t(locale, 'notfound.badge')}</span>
