@@ -149,7 +149,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 0.4rem 0.85rem; border: 1px solid var(--border-strong);
   border-radius: var(--radius); font-weight: 500; font-size: 0.8rem;
 }
-.nav-cta:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.nav-links a.nav-cta:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 
 .lang-switch { position: relative; }
 .lang-current {
