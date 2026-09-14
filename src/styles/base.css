@@ -433,7 +433,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ─── FAQ ─── */
-.faq-list { max-width: 800px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
   width: 100%; display: flex; align-items: center; justify-content: space-between;

@@ -52,4 +52,4 @@ export function localeParams() {
   return locales.map((l) => ({ params: { lang: l } }));
 }
 
-export const toolOrder = ['currency-converter', 'medipress', 'omnimd', 'clipboard-manager'];
+export const toolOrder = ['currency-converter', 'medipress', 'omnimd', 'invest-platform'];

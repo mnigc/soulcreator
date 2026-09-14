@@ -3,8 +3,6 @@ import Base from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { t, getToolI18n, toolOrder, localeParams, type Locale } from '../../i18n';
 import ToolCard from '../../components/ui/ToolCard.astro';
-import FaqItem from '../../components/ui/FaqItem.astro';
-
 export async function getStaticPaths() {
   return localeParams();
 }
@@ -19,11 +17,6 @@ const localizedTools = tools.map((entry) => {
 const ordered = toolOrder
   .map((slug) => localizedTools.find((tool) => tool.slug === slug))
   .filter(Boolean);
-
-const faqs = [1, 2, 3, 4].map((i) => ({
-  q: t(locale, `faq${i}.q`),
-  a: t(locale, `faq${i}.a`),
-}));
 
 const pageTitle = `${t(locale, 'hero.title1')} ${t(locale, 'hero.titleAccent')} — SoulCreator`;
 const pageDesc = t(locale, 'hero.lede');
@@ -76,18 +69,5 @@ const pageDesc = t(locale, 'hero.lede');
     <div class="tool-grid">
       {ordered.map((tool) => <ToolCard {...tool} locale={locale} />)}
     </div>
-  </section>
-
-  <section class="section page" data-od-id="faq">
-    <div class="section-head" style="text-align: center;">
-      <span class="label">{t(locale, 'sec.faq.label')}</span>
-      <h2>{t(locale, 'sec.faq.title')}</h2>
-      <p style="margin-inline: auto;">{t(locale, 'sec.faq.desc')}</p>
-    </div>
-    <div class="faq-list">
-      {faqs.map((item) => (
-        <FaqItem q={item.q} a={item.a} />
-      ))}
-    </div>
-  </section>
+   </section>
 </Base>

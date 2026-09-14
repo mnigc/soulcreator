@@ -41,9 +41,6 @@ const zh: Dict = {
   'sec.compare.label': 'Compare',
   'sec.compare.title': '四个工具，各管一摊',
   'sec.compare.desc': '没有“全能选手”，只有刚好够用的小工具。',
-  'sec.faq.label': 'FAQ',
-  'sec.faq.title': '常见问题',
-  'sec.faq.desc': '关于 SoulCreator 与这些工具的一些疑问。',
 
   'compare.capability': '能力',
   'compare.browseext': '浏览器扩展',
@@ -55,15 +52,6 @@ const zh: Dict = {
 
   'tools.browse': '浏览全部工具',
   'tools.viewAll': '查看全部工具',
-
-  'faq1.q': '这些工具收费吗？',
-  'faq1.a': '全部免费。没有付费墙，没有隐藏收费，所有功能都开放使用。',
-  'faq2.q': '代码开源吗？',
-  'faq2.a': '是的，核心代码以 MIT 协议开源，你可以在 GitHub 上 fork、修改、自托管。',
-  'faq3.q': '我的数据安全吗？',
-  'faq3.a': '桌面类工具均在本地完成处理，不上传任何文件到服务器；浏览器扩展也在页面内本地运算。',
-  'faq4.q': '支持哪些平台？',
-  'faq4.a': '浏览器扩展支持 Chrome / Edge；桌面应用支持 Windows / macOS / Linux；另外提供命令行入口。',
 
   'about.badge': '■ 关于',
   'about.title1': '打造工具的',
@@ -174,9 +162,6 @@ const en: Dict = {
   'sec.compare.label': 'Compare',
   'sec.compare.title': 'Four tools, each with its own job',
   'sec.compare.desc': "No 'do-it-all' tool—just small tools that fit just right.",
-  'sec.faq.label': 'FAQ',
-  'sec.faq.title': 'Frequently Asked Questions',
-  'sec.faq.desc': 'Some questions about SoulCreator and these tools.',
 
   'compare.capability': 'Capability',
   'compare.browseext': 'Browser Extension',
@@ -188,15 +173,6 @@ const en: Dict = {
 
   'tools.browse': 'Browse all tools',
   'tools.viewAll': 'View all tools',
-
-  'faq1.q': 'Do these tools cost anything?',
-  'faq1.a': 'All free. No paywalls, no hidden fees—every feature is open to use.',
-  'faq2.q': 'Is the code open source?',
-  'faq2.a': 'Yes—the core code is open source under the MIT license. You can fork, modify, and self-host it on GitHub.',
-  'faq3.q': 'Is my data safe?',
-  'faq3.a': 'Desktop tools process everything locally and never upload files to a server; the browser extension also runs computations right on the page.',
-  'faq4.q': 'Which platforms are supported?',
-  'faq4.a': 'The browser extension supports Chrome / Edge; desktop apps run on Windows / macOS / Linux; a CLI entry point is also provided.',
 
   'about.badge': '■ About',
   'about.title1': 'The ',
@@ -307,9 +283,6 @@ const ko: Dict = {
   'sec.compare.label': 'Compare',
   'sec.compare.title': '네 가지 도구, 각자의 역할',
   'sec.compare.desc': '‘만능’ 도구 없이, 딱 맞는 작은 도구만.',
-  'sec.faq.label': 'FAQ',
-  'sec.faq.title': '자주 묻는 질문',
-  'sec.faq.desc': 'SoulCreator와 이 도구들에 대한 몇 가지 질문.',
 
   'compare.capability': '기능',
   'compare.browseext': '브라우저 확장',
@@ -321,15 +294,6 @@ const ko: Dict = {
 
   'tools.browse': '모든 도구 보기',
   'tools.viewAll': '전체 도구 보기',
-
-  'faq1.q': '이 도구들은 유료인가요?',
-  'faq1.a': '전부 무료입니다. 유료 장벽도 숨은 요금도 없이 모든 기능을 이용할 수 있습니다.',
-  'faq2.q': '코드는 오픈소스인가요?',
-  'faq2.a': '네—핵심 코드는 MIT 라이선스로 오픈소스입니다. GitHub에서 fork·수정·셀프호스팅할 수 있습니다.',
-  'faq3.q': '내 데이터는 안전한가요?',
-  'faq3.a': '데스크톱 도구는 모두 로컬에서 처리하며 서버에 파일을 업로드하지 않습니다. 브라우저 확장도 페이지 내에서 로컬 연산합니다.',
-  'faq4.q': '어떤 플랫폼을 지원하나요?',
-  'faq4.a': '브라우저 확장은 Chrome / Edge를, 데스크톱 앱은 Windows / macOS / Linux를 지원하며, CLI 진입점도 제공됩니다.',
 
   'about.badge': '■ 소개',
   'about.title1': '도구를 만드는 ',
@@ -440,9 +404,6 @@ const ja: Dict = {
   'sec.compare.label': 'Compare',
   'sec.compare.title': '4つのツール、それぞれの役割',
   'sec.compare.desc': '「何でも屋」はなく、ちょうどいい小さなツールだけ。',
-  'sec.faq.label': 'FAQ',
-  'sec.faq.title': 'よくある質問',
-  'sec.faq.desc': 'SoulCreator とこれらのツールについての質問。',
 
   'compare.capability': '機能',
   'compare.browseext': 'ブラウザ拡張',
@@ -454,15 +415,6 @@ const ja: Dict = {
 
   'tools.browse': 'すべてのツールを見る',
   'tools.viewAll': '全ツールを見る',
-
-  'faq1.q': 'これらのツールは有料ですか？',
-  'faq1.a': 'すべて無料です。ペイウォールも隠れた料金もなく、すべての機能が利用できます。',
-  'faq2.q': 'コードはオープンソースですか？',
-  'faq2.a': 'はい——コアコードは MIT ライセンスでオープンソースです。GitHub で fork・修正・セルフホストできます。',
-  'faq3.q': '私のデータは安全ですか？',
-  'faq3.a': 'デスクトップツールはすべてローカルで処理し、サーバーにファイルをアップロードしません。ブラウザ拡張もページ内でローカル演算します。',
-  'faq4.q': 'どのプラットフォームに対応していますか？',
-  'faq4.a': 'ブラウザ拡張は Chrome / Edge に対応。デスクトップアプリは Windows / macOS / Linux に対応。さらに CLI も用意しています。',
 
   'about.badge': '■ 紹介',
   'about.title1': '道具を作る ',
