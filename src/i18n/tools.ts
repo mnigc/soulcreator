@@ -396,186 +396,222 @@ export const toolTranslations: Record<string, LocaleTools> = {
     en: {
       title: 'Universal to Markdown Converter',
       description:
-        'Turn any document—PDF, DOCX, EPUB, HTML—into structured Markdown with one click. Powered by the anydoc engine, it intelligently preserves the original document structure so the output is immediately usable.',
+        'Powered by the Firecrawl anydoc engine, convert Word, PowerPoint, Excel, PDF, EPUB, RTF, CSV and 14+ office formats into high-quality GitHub-Flavored Markdown. Pure Rust, median conversion under 5ms, with full structure preservation and consistent output across all formats.',
       category: 'Productivity Tools',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF Conversion', 'Document Conversion', 'Desktop App'],
+      tags: ['Markdown', 'PDF Conversion', 'Document Conversion', 'Rust', 'Desktop App'],
       features: [
         {
-          title: 'Multi-format support',
-          text: 'Supports mainstream document formats including PDF, DOCX, EPUB, and HTML. Whether it\'s academic papers, technical manuals, or e-books, convert them to clean Markdown in one click.',
+          title: '14+ formats covered',
+          text: 'Word (.doc/.docx/.docm), PowerPoint (.ppt/.pptx/.pptm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF—14 formats in a single dependency. The only tool to cover all of them.',
         },
         {
-          title: 'Tables & formulas',
-          text: 'Converts document tables into Markdown tables and math formulas into LaTeX format, preserving the informational completeness of the original.',
+          title: 'Blazing fast',
+          text: 'Pure Rust, no ML models, no external services. Median conversion time under 5ms—10x faster than the next-best alternative (52ms). Hundred-page documents convert in seconds.',
         },
         {
-          title: 'Smart layout',
-          text: 'Automatically detects headings, paragraphs, lists, code blocks, links, and quotes, then converts them into standard Markdown—ready to use with no second pass of editing.',
+          title: 'Full structure preserved',
+          text: 'Headings with anchors, bold/italic/strikethrough, inline code, code blocks, links and cross-references, nested lists, merged-cell tables, quotes, footnotes, endnotes, and speaker notes—all rendered as standard Markdown.',
         },
         {
-          title: 'Large-file handling',
-          text: 'Smart memory management keeps even hundred-page PDFs running smoothly at roughly 2–5 pages per second. No more splitting files or waiting in anxiety.',
+          title: 'Equations to LaTeX',
+          text: 'OMML (Word/PowerPoint), MathML (OpenDocument/EPUB), and RTF equations convert to GitHub math syntax ($...$ inline, $$...$$ blocks), ready to render.',
         },
         {
-          title: 'Fully offline',
-          text: 'All conversion happens locally—no internet, no processing queues. Unlimited runs and pages per job, with privacy and speed together.',
+          title: 'Consistent output across formats',
+          text: 'Every format parses into a shared document model and renders through a single Markdown serializer. A 2003 .doc and a 2025 .pptx produce identical escaping, tables, anchors, and footnotes.',
+        },
+        {
+          title: 'Content-based format detection',
+          text: 'Format is read from file bytes (PDF header, RTF open group, OLE stream names, ZIP mimetype)—not the extension. Mislabeled files still convert correctly.',
+        },
+        {
+          title: 'Multi-language bindings',
+          text: 'Rust, Node.js (npm), Python (pip), Browser (WebAssembly), and CLI. Same API everywhere, TypeScript types and Python stubs included.',
         },
         {
           title: 'Developer-friendly',
-          text: 'CLI invocation lets you drop it seamlessly into build pipelines and automation scripts, making Markdown conversion part of your dev workflow.',
+          text: 'One CLI command to convert. Node.js runs on libuv thread pool without blocking the event loop; Python releases the GIL. Drop it into any build pipeline or CI/CD.',
         },
       ],
       stats: [
-        { label: 'Formats', sub: 'Mainstream documents', value: '10+' },
-        { label: 'Languages', sub: 'Multilingual', value: '10+' },
-        { label: 'Speed', sub: 'Large PDF', value: '5 pg/s' },
-        { label: 'Internet needed', sub: 'Fully offline', value: '0' },
+        { label: 'Formats', sub: 'Full office coverage', value: '14+' },
+        { label: 'Conversion speed', sub: 'Median time', value: '< 5ms' },
+        { label: 'Quality score', sub: 'LLM blind test', value: '81/100' },
+        { label: 'Dependencies', sub: 'Pure Rust', value: '0' },
       ],
       faq: [
         {
           q: 'Which input formats are supported?',
-          a: 'Supports mainstream document formats including PDF, DOCX, EPUB, and HTML, covering academic papers, technical manuals, e-books, and more.',
+          a: '14+ office formats: Word (.doc/.docx/.docm), PowerPoint (.ppt/.pptx/.pptm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF. The only tool covering all 14.',
         },
         {
           q: 'How is the resulting Markdown formatted?',
-          a: 'It auto-detects structure like headings, paragraphs, lists, code blocks, links, and quotes, converts them into standard Markdown, renders tables as Markdown tables, and formulas as LaTeX.',
+          a: 'Headings with anchors, bold/italic/strikethrough, inline code, code blocks, links and cross-references, nested lists, merged-cell tables, quotes, footnotes, endnotes, and speaker notes all preserved. Equations convert to LaTeX, tables to Markdown tables.',
         },
         {
-          q: 'Does it work well with Chinese?',
-          a: 'Fully supports Chinese document conversion. Mixed CJK text (Chinese, Japanese, Korean) is also correctly recognized and converted.',
+          q: 'How fast is it?',
+          a: 'Pure Rust, median conversion under 5ms per document. 10x faster than the next-best alternative (52ms) in benchmarks across 14 formats.',
         },
         {
-          q: 'Can it handle large files?',
-          a: 'Yes. Smart memory management keeps even large (hundred-page) PDFs running smoothly at about 2–5 pages per second.',
+          q: 'Does it support Chinese?',
+          a: 'Fully. Mixed CJK text (Chinese, Japanese, Korean) is correctly parsed and converted.',
         },
         {
           q: 'How is it better than online converters?',
-          a: 'Fully local—no privacy worries; no internet needed, no queue waiting; unlimited runs and pages per job.',
+          a: 'Fully local with zero dependencies—no privacy risks; pure Rust, blazing fast with no queue waiting; quality verified by LLM blind test (81/100, highest); one CLI command for seamless automation integration.',
+        },
+        {
+          q: 'Does it support scanned PDFs?',
+          a: 'anydoc does not do OCR itself. Scanned PDFs require the Firecrawl Parse hosted API for OCR, which returns the same Markdown output.',
         },
       ],
     },
     ko: {
       title: '만능 to 마크다운 변환기',
       description:
-        '어떤 문서든—PDF·DOCX·EPUB·HTML—한 번의 클릭으로 구조화된 마크다운으로 변환합니다. anydoc 엔진 기반으로 원문서 구조를 지능적으로 보존해 결과를 바로 사용할 수 있습니다.',
+        'Firecrawl anydoc 엔진 기반으로 Word·PPT·Excel·PDF·EPUB·RTF·CSV 등 14+가지 오피스 문서를 고품질 GitHub-Flavored Markdown으로 변환합니다. 순수 Rust로 작성되어 중위 변환 속도 < 5ms, 모든 형식에서 구조가 완벽히 보존됩니다.',
       category: '생산성 도구',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF 변환', '문서 변환', '데스크톱 앱'],
+      tags: ['Markdown', 'PDF 변환', '문서 변환', 'Rust', '데스크톱 앱'],
       features: [
         {
-          title: '다중 형식 지원',
-          text: 'PDF·DOCX·EPUB·HTML 등 주요 문서 형식을 지원합니다. 학술 논문, 기술 매뉴얼, 전자책 등 어떤 문서든 한 번의 클릭으로 깔끔한 마크다운으로 변환합니다.',
+          title: '14+ 형식 전면 지원',
+          text: 'Word(.doc/.docx/.docm), PowerPoint(.ppt/.pptx/.pptm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF—14가지 형식을 하나의 의존성으로 지원합니다. 이를 모두 커버하는 유일한 도구입니다.',
         },
         {
-          title: '표와 수식',
-          text: '문서의 표를 마크다운 표로, 수식을 LaTeX 형식으로 변환하여 원문서의 정보 완전성을 보존합니다.',
+          title: '광속 변환',
+          text: '순수 Rust로 작성되어 ML 모델이나 외부 서비스 없이 동작합니다. 중위 변환 속도 < 5ms로, 다음으로 빠른 도구(52ms)보다 10배 빠릅니다.',
         },
         {
-          title: '스마트 레이아웃',
-          text: '제목 계층·문단·목록·코드 블록·링크·인용 등 구조를 자동 인식해 표준 마크다운으로 변환하므로 바로 사용 가능하며 재편집이 필요 없습니다.',
+          title: '완벽한 구조 보존',
+          text: '제목(앵커 포함), 굵은 글씨/기울임/취소선, 인라인 코드, 코드 블록, 링크와 상호 참조, 중첩 목록, 병합 셀 표, 인용, 각주/말미주, 발표자 노트까지 모두 표준 마크다운으로 변환합니다.',
         },
         {
-          title: '대용량 파일 처리',
-          text: '지능형 메모리 관리로 수백 페이지 PDF도 초당 약 2~5페이지의 속도로 끊김 없이 처리됩니다. 파일 분할이나 대기 불안도 끝입니다.',
+          title: '수식 → LaTeX',
+          text: 'Word/PowerPoint의 OMML, OpenDocument/EPUB의 MathML, RTF 수식을 GitHub 수학 구문($...$ 인라인, $$...$$ 블록)으로 변환합니다.',
         },
         {
-          title: '완전 오프라인',
-          text: '모든 변환이 로컬에서 이루어져 인터넷이나 처리 대기열이 필요 없습니다. 횟수·페이지 제한 없이 프라이버시와 속도를 모두 챙깁니다.',
+          title: '형식 간 일관된 출력',
+          text: '모든 형식이 공유 문서 모델로 해석된 후 단일 마크다운 직렬화기를 통해 렌더링됩니다. 2003년의 .doc와 최신 .pptx 모두 동일한 방식으로 출력됩니다.',
+        },
+        {
+          title: '콘텐츠 기반 형식 감지',
+          text: '확장명 대신 파일 바이트에서 형식을 판독(PDF 헤더, RTF 오픈 그룹, OLE 스트림명, ZIP mimetype). 잘못된 확장명의 파일도 정しく 변환됩니다.',
+        },
+        {
+          title: '다국어 바인딩',
+          text: 'Rust, Node.js(npm), Python(pip), 브라우저(WebAssembly), CLI 제공. 모든 환경에서 동일한 API, TypeScript 타입 및 Python 스텁 포함.',
         },
         {
           title: '개발자 친화적',
-          text: 'CLI 호출을 지원해 빌드 파이프라인과 자동화 스크립트에 매끄럽게 통합할 수 있어 마크다운 변환을 개발 워크플로의 일부로 만듭니다.',
+          text: 'CLI 한 줄 명령으로 변환. Node.js는 이벤트 루프를 차단하지 않고, Python은 GIL을 해제합니다. 빌드 파이프라인이나 CI/CD에 바로 통합 가능합니다.',
         },
       ],
       stats: [
-        { label: '지원 형식', sub: '주요 문서', value: '10+' },
-        { label: '지원 언어', sub: '다국어', value: '10+' },
-        { label: '처리 속도', sub: '대형 PDF', value: '5 페이지/s' },
-        { label: '인터넷 필요', sub: '완전 오프라인', value: '0' },
+        { label: '지원 형식', sub: '오피스 문서 전면 커버', value: '14+' },
+        { label: '변환 속도', sub: '중위 시간', value: '< 5ms' },
+        { label: '품질 점수', sub: 'LLM 블라인드 테스트', value: '81/100' },
+        { label: '외부 의존성', sub: '순수 Rust', value: '0' },
       ],
       faq: [
         {
           q: '어떤 입력 형식을 지원하나요?',
-          a: 'PDF·DOCX·EPUB·HTML 등 주요 문서 형식을 지원하며, 학술 논문, 기술 매뉴얼, 전자책 등 다양한 상황을 커버합니다.',
+          a: '14가지 오피스 형식을 지원합니다: Word(.doc/.docx/.docm), PowerPoint(.ppt/.pptx/.pptm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF. 14개 형식을 모두 커버하는 유일한 도구입니다.',
         },
         {
           q: '변환된 마크다운 형식은 어떤가요?',
-          a: '제목 계층·문단·목록·코드 블록·링크·인용 등 구조를 자동 인식해 표준 마크다운으로 변환하고, 표는 마크다운 표로, 수식은 LaTeX 형식으로 변환합니다.',
+          a: '제목(앵커 포함), 굵은 글씨/기울임/취소선, 인라인 코드, 코드 블록, 링크, 중첩 목록, 병합 셀 표, 인용, 각주/말미주, 발표자 노트까지 모두 보존합니다. 수식은 LaTeX로, 표는 마크다운 표로 변환됩니다.',
+        },
+        {
+          q: '얼마나 빠르나요?',
+          a: '순수 Rust로 중위 변환 속도 < 5ms/문서. 14개 형식 벤치마크에서 다음으로 빠른 도구(52ms)보다 10배 빠릅니다.',
         },
         {
           q: '중국어 지원이 좋은가요?',
-          a: '중국어 문서 변환을 완전히 지원합니다. 중·일·한 다국어 혼용도 올바르게 인식하고 변환합니다.',
-        },
-        {
-          q: '대용량 파일을 처리할 수 있나요?',
-          a: '가능합니다. 지능형 메모리 관리로 수백 페이지의 대형 PDF도 초당 약 2~5페이지의 속도로 끊김 없이 처리됩니다.',
+          a: '완전히 지원합니다. 중·일·한 다국어 혼용도 올바르게 파싱하고 변환합니다.',
         },
         {
           q: '온라인 변환 도구 대비 장점은?',
-          a: '완전 로컬이라 프라이버시 걱정이 없고, 인터넷도 대기열도 필요 없으며, 횟수·페이지 제한 없는 처리가 가능합니다.',
+          a: '완전 로컬, 외부 의존성 0개—프라이버시 걱정 無; 순수 Rust로 광속 처리, 대기열 없음; LLM 블라인드 테스트로 품질 검증(81/100, 최고); CLI 한 줄 명령으로 자동화 통합 용이.',
+        },
+        {
+          q: '스캔 PDF를 지원하나요?',
+          a: 'anydoc 자체는 OCR를 지원하지 않습니다. 스캔된 PDF는 Firecrawl Parse 호스티드 API로 OCR를 거쳐 동일한 마크다운 출력을 반환합니다.',
         },
       ],
     },
     ja: {
       title: '万能 to マークダウン変換',
       description:
-        'どんな文書でも——PDF・DOCX・EPUB・HTML——ワンクリックで構造化された Markdown に変換します。anydoc エンジン駆動で原文書の構造を知的に保存し、そのまま使える出力を実現。',
+        'Firecrawl anydoc エンジン駆動で、Word・PowerPoint・Excel・PDF・EPUB・RTF・CSV など14以上のオフィス文書を高品質な GitHub-Flavored Markdown に変換します。純粋な Rust 実装で中位変換時間 < 5ms、全形式で構造を完璧に保存。',
       category: '生産性ツール',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF 変換', '文書変換', 'デスクトップアプリ'],
+      tags: ['Markdown', 'PDF 変換', '文書変換', 'Rust', 'デスクトップアプリ'],
       features: [
         {
-          title: 'マルチフォーマット対応',
-          text: 'PDF・DOCX・EPUB・HTML などの主要な文書形式をサポート。学術論文、技術マニュアル、電子書籍など、あらゆる文書をワンクリックでクリーンな Markdown に変換できます。',
+          title: '14以上の形式を全面対応',
+          text: 'Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pptx/.pptm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF—14の形式を単一依存でサポート。すべてをカバーする唯一のツール。',
         },
         {
-          title: '表と数式',
-          text: '文書の表を Markdown 表に、数式を LaTeX 形式に変換し、原文書の情報完全性を保持します。',
+          title: '高速変換',
+          text: '純粋な Rust で ML モデルも外部サービスも不要。中位変換時間 < 5ms となext-best(52ms)の10倍速。数百ページでも数秒で完了。',
         },
         {
-          title: 'スマートレイアウト',
-          text: '見出し階層・段落・リスト・コードブロック・リンク・引用などの構造を自動認識し、標準 Markdown に変換するため、そのまま使えて再編集は不要です。',
+          title: '完全な構造保存',
+          text: '見出し（アンカー付き）、太字/イタリック/取り消し線、インラインコード、コードブロック、リンクと相互参照、中첩リスト、マージセル表、引用、脚注/末尾注、発表者ノートまで標準 Markdown に。',
         },
         {
-          title: '大容量ファイル処理',
-          text: 'インテリジェントなメモリ管理で数百ページの PDF も秒間約2〜5ページの速度で滑らかに処理。ファイル分割や待機の不安ともおさらばです。',
+          title: '数式 → LaTeX',
+          text: 'Word/PowerPoint の OMML、OpenDocument/EPUB の MathML、RTF 数式を GitHub 数学記法（$...$ インライン、$$...$$ ブロック）に変換。',
         },
         {
-          title: '完全オフライン',
-          text: 'すべての変換はローカルで完結し、インターネットも処理待ち行列も不要。回数・ページ数の制限なく、プライバシーと速度を両立します。',
+          title: '形式間の一貫した出力',
+          text: '全形式が共有ドキュメントモデルに解析され、単一 Markdown シリアライザーでレンダリング。2003年の .doc と最新 .pptx でもエスケープ・表・アンカー・脚注の挙動が完全一致。',
+        },
+        {
+          title: 'コンテンツベース形式検出',
+          text: '拡張子ではなくファイルバイトから形式を判読（PDF ヘッダー、RTF オープングループ、OLE ストリーム名、ZIP mimetype）。誤った拡張子のファイルも正しく変換。',
+        },
+        {
+          title: '多言語バインディング',
+          text: 'Rust、Node.js(npm)、Python(pip)、ブラウザ(WebAssembly)、CLI を提供。全環境で同一 API、TypeScript 型・Python スタブ付き。',
         },
         {
           title: '開発者フレンドリ',
-          text: 'CLI 呼び出しに対応し、ビルドパイプラインや自動化スクリプトにシームレスに統合できるため、Markdown 変換を開発ワークフローの一部にできます。',
+          text: 'CLI 一行コマンドで変換。Node.js はイベントループをブロックせず、Python は GIL を解放。ビルドパイプラインや CI/CD に即時統合可能。',
         },
       ],
       stats: [
-        { label: '対応形式', sub: '主要文書', value: '10+' },
-        { label: '対応言語', sub: '多言語', value: '10+' },
-        { label: '処理速度', sub: '大型 PDF', value: '5 ページ/秒' },
-        { label: '通信要件', sub: '完全オフライン', value: '0' },
+        { label: '対応形式', sub: 'オフィス文書全面カバー', value: '14+' },
+        { label: '変換速度', sub: '中位時間', value: '< 5ms' },
+        { label: '品質スコア', sub: 'LLM ブラインドテスト', value: '81/100' },
+        { label: '外部依存', sub: '純粋な Rust', value: '0' },
       ],
       faq: [
         {
           q: 'どの入力形式に対応していますか？',
-          a: 'PDF・DOCX・EPUB・HTML などの主要な文書形式に対応し、学術論文、技術マニュアル、電子書籍など多様なシナリオをカバーします。',
+          a: '14のオフィス形式に対応：Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pptx/.pptm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF。14形式すべてをカバーする唯一のツール。',
         },
         {
           q: '変換後の Markdown はどのような形式ですか？',
-          a: '見出し階層・段落・リスト・コードブロック・リンク・引用などの構造を自動認識し、標準 Markdown に変換。表は Markdown 表、数式は LaTeX 形式に変換します。',
+          a: '見出し（アンカー付き）、太字/イタリック/取り消し線、インラインコード、コードブロック、リンク、中첩リスト、マージセル表、引用、脚注/末尾注、発表者ノートまで保存。数式は LaTeX、表は Markdown 表に変換。',
+        },
+        {
+          q: 'どのくらい速いですか？',
+          a: '純粋な Rust で中位変換時間 < 5ms/文書。14形式ベンチマークで次点のツール(52ms)より10倍速。',
         },
         {
           q: '中国語の対応は良いですか？',
-          a: '中国語文書の変換を完全サポート。中国語・日本語・韓国語の多言語混在も正しく認識・変換します。',
-        },
-        {
-          q: '大容量ファイルは処理できますか？',
-          a: '可能です。インテリジェントなメモリ管理で数百ページの大型 PDF も秒間約2〜5ページの速度で滑らかに処理されます。',
+          a: '完全サポート。中国語・日本語・韓国語の多言語混在も正しく解析・変換します。',
         },
         {
           q: 'オンライン変換ツールとの違いは？',
-          a: '完全ローカルなのでプライバシーの心配がなく、インターネットも待ち行列も不要。回数・ページ数の制限なく処理できます。',
+          a: '完全ローカル、外部依存0—プライバシーリスクなし。純粋な Rust で超高速、待ち行列なし。LLM ブラインドテストで品質検証済み(81/100、最高)。CLI 一行で自動化に簡単に統合。',
+        },
+        {
+          q: 'スキャン PDF は対応しますか？',
+          a: 'anydoc 自体は OCR を行いません。スキャン済み PDF は Firecrawl Parse ホステッド API による OCR で同じ Markdown 出力を返します。',
         },
       ],
     },

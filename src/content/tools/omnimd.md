@@ -1,49 +1,56 @@
 ---
 title: 万物转 Markdown
 titleEn: Universal to Markdown Converter
-description: 任何文档——PDF、DOCX、EPUB、HTML——一键转为结构化 Markdown。基于 anydoc 引擎，智能保留原文档结构，转换结果直接可用。
+description: 基于 Firecrawl anydoc 引擎，将 Word、PPT、Excel、PDF、EPUB、RTF、CSV 等 14+ 种办公文档一键转为高质量 GitHub-Flavored Markdown。纯 Rust 编写，中位转换速度 < 5ms，输出结构完整、跨格式一致。
 tags:
   - Markdown
   - PDF 转换
   - 文档转换
+  - Rust
   - 桌面应用
 platform: Windows / macOS / Linux
 category: 效率工具
 features:
-  - title: 多格式支持
-    text: 支持 PDF、DOCX、EPUB、HTML 等主流文档格式。无论学术文献、技术手册还是电子书，都能一键转为纯文本 Markdown。
-  - title: 智能排版
-    text: 自动识别标题层级、段落、列表、代码块、链接、引用等结构，转换为标准 Markdown 语法，输出直接可用，无需二次编辑。
-  - title: 表格与公式
-    text: 支持将文档中的表格还原为 Markdown 表格，数学公式转为 LaTeX 格式，保留原文档的信息完整性。
-  - title: 大文件处理
-    text: 智能内存管理，处理数百页大型 PDF 也能流畅运行，速度约每秒 2-5 页。告别文件拆分和等待焦虑。
-  - title: 完全离线
-    text: 所有转换在本地完成，无需联网，无处理队列等待。一次处理不限次数、不限页数，隐私与效率兼得。
+  - title: 14+ 格式全覆盖
+    text: 支持 Word（.doc/.docx/.docm）、PowerPoint（.ppt/.pptx/.pptm 等）、Excel（.xls/.xlsx/.xlsm/.xlsb）、OpenDocument（.odt/.ods/.odp）、RTF、EPUB、CSV、PDF。14 种格式仅需一个依赖，无需拼装多个转换库。
+  - title: 极致的转换速度
+    text: 纯 Rust 编写，无 ML 模型、无外部服务依赖。基准测试中位转换时间 < 5ms，比其他工具快一个数量级。百页文档也秒级完成。
+  - title: 完整结构还原
+    text: 标题（含锚点）、粗体/斜体/删除线、行内代码与代码块、链接与交叉引用、多级嵌套列表、合并单元格表格、引用、脚注/尾注、演讲者备注——全部保留为标准 Markdown 语法。
+  - title: 公式转 LaTeX
+    text: Word/PowerPoint 的 OMML、OpenDocument/EPUB 的 MathML、RTF 公式统一转为 GitHub 数学语法（$...$ 行内、$$...$$ 块级），无缝接入文档。
+  - title: 跨格式一致输出
+    text: 所有格式解析为共享文档模型，经同一个 Markdown 序列化器渲染。无论输入是 2003 年的 .doc 还是昨天的 .pptx，转义、表格、锚点、脚注的行为完全一致。
+  - title: 智能格式检测
+    text: 从文件内容本身读取格式标识（PDF 头、RTF 开组、OLE 流名、ZIP mimetype），不依赖扩展名。错误命名的文件也能正确转换。
+  - title: 多语言绑定
+    text: 提供 Rust、Node.js（npm）、Python（pip）、浏览器（WebAssembly）四种绑定，加上 CLI 命令行。同一套 API，即装即用。
   - title: 开发者友好
-    text: 支持 CLI 命令行调用，可无缝集成到构建流程和自动化脚本中，让 Markdown 转换成为开发流水线的一部分。
+    text: CLI 一行命令转换，可直接集成到构建流水线、CI/CD 或自动化脚本中。Node.js 不阻塞事件循环，Python 释放 GIL。
 stats:
   - label: 支持格式
-    value: 10+
-    sub: 主流文档
-  - label: 支持语言
-    value: 10+
-    sub: 多语言
-  - label: 处理速度
-    value: 5 页/s
-    sub: 大型 PDF
-  - label: 联网需求
+    value: 14+
+    sub: 办公文档全覆盖
+  - label: 转换速度
+    value: < 5ms
+    sub: 中位耗时
+  - label: 质量评分
+    value: 81/100
+    sub: LLM 盲测最高
+  - label: 外部依赖
     value: "0"
-    sub: 完全离线
+    sub: 纯 Rust，零依赖
 faq:
   - q: 支持哪些输入格式？
-    a: 支持 PDF、DOCX、EPUB、HTML 等主流文档格式，覆盖学术文献、技术手册、电子书等多种场景。
+    a: 支持 14+ 种办公文档格式：Word（.doc/.docx/.docm）、PowerPoint（.ppt/.pptx/.pptm 等）、Excel（.xls/.xlsx/.xlsm/.xlsb）、OpenDocument（.odt/.ods/.odp）、RTF、EPUB、CSV、PDF。是唯一覆盖全部 14 种格式的工具。
   - q: 转换后的 Markdown 格式如何？
-    a: 自动识别标题层级、段落、列表、代码块、链接、引用等结构，并正确转换为标准 Markdown 语法。表格还原为 Markdown 表格，公式转为 LaTeX 格式。
-  - q: 中文支持好吗？
-    a: 全面支持中文文档转换，中日韩等多语言混排也能正确识别和转换。
-  - q: 大文件处理支持吗？
-    a: 支持。内存智能管理，处理大型 PDF（数百页）也能流畅运行，速度约为每秒 2-5 页。
+    a: 标题含锚点、粗体/斜体/删除线、行内代码与代码块、链接与交叉引用、多级列表、合并单元格表格、引用、脚注/尾注、演讲者备注全部保留。公式转为 LaTeX，表格转 Markdown 表格。
+  - q: 速度有多快？
+    a: 纯 Rust 编写，中位转换时间 < 5ms/文档。基准测试中比其他工具快一个数量级（第二名 52ms）。
+  - q: 支持中文吗？
+    a: 完全支持。中文、日文、韩文等多语言混排文档都能正确解析和转换。
   - q: 与在线转换工具比有什么优势？
-    a: 完全本地化，隐私无忧；无需联网，无处理队列等待；一次处理不限次数不限页数。
+    a: 完全本地化，零外部依赖，隐私无忧；纯 Rust 极速，无需排队；转换质量经 LLM 盲测验证最高（81/100）；CLI 一行命令，完美融入自动化流程。
+  - q: 扫描版 PDF 支持吗？
+    a: anydoc 本身不支持 OCR，扫描版 PDF 需搭配 Firecrawl Parse 云端 API 进行 OCR 转换。
 ---
