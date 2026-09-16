@@ -396,18 +396,18 @@ export const toolTranslations: Record<string, LocaleTools> = {
     en: {
       title: 'Universal to Markdown Converter',
       description:
-        'Turn anything—images, PDFs, screenshots, even handwritten notes—into structured Markdown with one click. A built-in OCR engine and AI layout restore make the output immediately usable.',
+        'Turn any document—PDF, DOCX, EPUB, HTML—into structured Markdown with one click. Powered by the anydoc engine, it intelligently preserves the original document structure so the output is immediately usable.',
       category: 'Productivity Tools',
       platform: 'Windows / macOS / Linux',
-      tags: ['OCR', 'Markdown', 'PDF Conversion', 'Image Recognition', 'Desktop App'],
+      tags: ['Markdown', 'PDF Conversion', 'Document Conversion', 'Desktop App'],
       features: [
         {
-          title: 'Any input',
-          text: 'Images (PNG, JPG, HEIC…), PDF documents, screenshots, even photos of handwritten notes—anything with text is worth a try, no manual prepping required.',
+          title: 'Multi-format support',
+          text: 'Supports mainstream document formats including PDF, DOCX, EPUB, and HTML. Whether it\'s academic papers, technical manuals, or e-books, convert them to clean Markdown in one click.',
         },
         {
-          title: 'High-accuracy OCR',
-          text: 'A deep-learning OCR engine tops 98% accuracy on Chinese text, and also handles Japanese, Korean, English, French and other major languages with human-entry quality.',
+          title: 'Tables & formulas',
+          text: 'Converts document tables into Markdown tables and math formulas into LaTeX format, preserving the informational completeness of the original.',
         },
         {
           title: 'Smart layout',
@@ -419,7 +419,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           title: 'Fully offline',
-          text: 'All recognition and conversion happen locally—no internet, no processing queues. Unlimited runs and pages per job, with privacy and speed together.',
+          text: 'All conversion happens locally—no internet, no processing queues. Unlimited runs and pages per job, with privacy and speed together.',
         },
         {
           title: 'Developer-friendly',
@@ -427,7 +427,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
       ],
       stats: [
-        { label: 'OCR accuracy', sub: 'Chinese text', value: '98%+' },
+        { label: 'Formats', sub: 'Mainstream documents', value: '10+' },
         { label: 'Languages', sub: 'Multilingual', value: '10+' },
         { label: 'Speed', sub: 'Large PDF', value: '5 pg/s' },
         { label: 'Internet needed', sub: 'Fully offline', value: '0' },
@@ -435,22 +435,22 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: 'Which input formats are supported?',
-          a: 'Images (PNG, JPG, HEIC…), PDF documents, screenshots, even photos of handwritten notes—anything containing text is worth a try.',
+          a: 'Supports mainstream document formats including PDF, DOCX, EPUB, and HTML, covering academic papers, technical manuals, e-books, and more.',
         },
         {
           q: 'How is the resulting Markdown formatted?',
-          a: 'It auto-detects structure like headings, paragraphs, lists, code blocks, links, and quotes, then converts them into correct standard Markdown.',
+          a: 'It auto-detects structure like headings, paragraphs, lists, code blocks, links, and quotes, converts them into standard Markdown, renders tables as Markdown tables, and formulas as LaTeX.',
         },
         {
-          q: 'Is Chinese recognition accurate?',
-          a: 'A deep-learning OCR engine exceeds 98% accuracy on Chinese, and also supports major languages like Japanese, Korean, and English.',
+          q: 'Does it work well with Chinese?',
+          a: 'Fully supports Chinese document conversion. Mixed CJK text (Chinese, Japanese, Korean) is also correctly recognized and converted.',
         },
         {
           q: 'Can it handle large files?',
           a: 'Yes. Smart memory management keeps even large (hundred-page) PDFs running smoothly at about 2–5 pages per second.',
         },
         {
-          q: 'How is it better than cloud OCR tools?',
+          q: 'How is it better than online converters?',
           a: 'Fully local—no privacy worries; no internet needed, no queue waiting; unlimited runs and pages per job.',
         },
       ],
@@ -458,18 +458,18 @@ export const toolTranslations: Record<string, LocaleTools> = {
     ko: {
       title: '만능 to 마크다운 변환기',
       description:
-        '이미지·PDF·스크린샷·심지어 손글씨 메모까지—한 번의 클릭으로 구조화된 마크다운으로 변환합니다. 내장 OCR 엔진과 AI 레이아웃 복원으로 결과를 바로 사용할 수 있습니다.',
+        '어떤 문서든—PDF·DOCX·EPUB·HTML—한 번의 클릭으로 구조화된 마크다운으로 변환합니다. anydoc 엔진 기반으로 원문서 구조를 지능적으로 보존해 결과를 바로 사용할 수 있습니다.',
       category: '생산성 도구',
       platform: 'Windows / macOS / Linux',
-      tags: ['OCR', 'Markdown', 'PDF 변환', '이미지 인식', '데스크톱 앱'],
+      tags: ['Markdown', 'PDF 변환', '문서 변환', '데스크톱 앱'],
       features: [
         {
-          title: '모든 입력',
-          text: '이미지(PNG·JPG·HEIC 등), PDF 문서, 스크린샷, 심지어 손글씨 메모 사진까지—글자가 포함된 것이라면 별도 정리 없이 변환을 시도해 보세요.',
+          title: '다중 형식 지원',
+          text: 'PDF·DOCX·EPUB·HTML 등 주요 문서 형식을 지원합니다. 학술 논문, 기술 매뉴얼, 전자책 등 어떤 문서든 한 번의 클릭으로 깔끔한 마크다운으로 변환합니다.',
         },
         {
-          title: '고정밀 OCR',
-          text: '딥러닝 OCR 엔진이 중국어에서 98% 이상 정확도를 자랑하며, 일본어·한국어·영어·프랑스어 등 주요 언어도 사람이 입력한 수준의 품질로 처리합니다.',
+          title: '표와 수식',
+          text: '문서의 표를 마크다운 표로, 수식을 LaTeX 형식으로 변환하여 원문서의 정보 완전성을 보존합니다.',
         },
         {
           title: '스마트 레이아웃',
@@ -481,7 +481,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           title: '완전 오프라인',
-          text: '모든 인식과 변환이 로컬에서 이루어져 인터넷이나 처리 대기열이 필요 없습니다. 횟수·페이지 제한 없이 프라이버시와 속도를 모두 챙깁니다.',
+          text: '모든 변환이 로컬에서 이루어져 인터넷이나 처리 대기열이 필요 없습니다. 횟수·페이지 제한 없이 프라이버시와 속도를 모두 챙깁니다.',
         },
         {
           title: '개발자 친화적',
@@ -489,7 +489,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
       ],
       stats: [
-        { label: 'OCR 정확도', sub: '중국어 인식', value: '98%+' },
+        { label: '지원 형식', sub: '주요 문서', value: '10+' },
         { label: '지원 언어', sub: '다국어', value: '10+' },
         { label: '처리 속도', sub: '대형 PDF', value: '5 페이지/s' },
         { label: '인터넷 필요', sub: '완전 오프라인', value: '0' },
@@ -497,22 +497,22 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: '어떤 입력 형식을 지원하나요?',
-          a: '이미지(PNG·JPG·HEIC 등), PDF 문서, 스크린샷, 심지어 손글씨 메모 사진까지—글자가 포함된 것이라면 변환을 시도해 볼 수 있습니다.',
+          a: 'PDF·DOCX·EPUB·HTML 등 주요 문서 형식을 지원하며, 학술 논문, 기술 매뉴얼, 전자책 등 다양한 상황을 커버합니다.',
         },
         {
           q: '변환된 마크다운 형식은 어떤가요?',
-          a: '제목 계층·문단·목록·코드 블록·링크·인용 등 구조를 자동 인식해 올바른 표준 마크다운 구문으로 변환합니다.',
+          a: '제목 계층·문단·목록·코드 블록·링크·인용 등 구조를 자동 인식해 표준 마크다운으로 변환하고, 표는 마크다운 표로, 수식은 LaTeX 형식으로 변환합니다.',
         },
         {
-          q: '중국어 인식이 정확한가요?',
-          a: '딥러닝 OCR 엔진으로 중국어 인식 정확도가 98%를 넘으며, 일본어·한국어·영어 등 주요 언어도 지원합니다.',
+          q: '중국어 지원이 좋은가요?',
+          a: '중국어 문서 변환을 완전히 지원합니다. 중·일·한 다국어 혼용도 올바르게 인식하고 변환합니다.',
         },
         {
           q: '대용량 파일을 처리할 수 있나요?',
           a: '가능합니다. 지능형 메모리 관리로 수백 페이지의 대형 PDF도 초당 약 2~5페이지의 속도로 끊김 없이 처리됩니다.',
         },
         {
-          q: '클라우드 OCR 도구 대비 장점은?',
+          q: '온라인 변환 도구 대비 장점은?',
           a: '완전 로컬이라 프라이버시 걱정이 없고, 인터넷도 대기열도 필요 없으며, 횟수·페이지 제한 없는 처리가 가능합니다.',
         },
       ],
@@ -520,18 +520,18 @@ export const toolTranslations: Record<string, LocaleTools> = {
     ja: {
       title: '万能 to マークダウン変換',
       description:
-        '画像・PDF・スクリーンショット・さらには手書きメモまで——ワンクリックで構造化された Markdown に変換します。組み込みの OCR エンジンと AI レイアウト復元で、そのまま使える出力を実現。',
+        'どんな文書でも——PDF・DOCX・EPUB・HTML——ワンクリックで構造化された Markdown に変換します。anydoc エンジン駆動で原文書の構造を知的に保存し、そのまま使える出力を実現。',
       category: '生産性ツール',
       platform: 'Windows / macOS / Linux',
-      tags: ['OCR', 'Markdown', 'PDF 変換', '画像認識', 'デスクトップアプリ'],
+      tags: ['Markdown', 'PDF 変換', '文書変換', 'デスクトップアプリ'],
       features: [
         {
-          title: 'あらゆる入力',
-          text: '画像（PNG・JPG・HEIC など）、PDF 文書、スクリーンショット、さらには手書きメモの写真まで——文字が含まれていれば手作業の下ごしらえなしで変換できます。',
+          title: 'マルチフォーマット対応',
+          text: 'PDF・DOCX・EPUB・HTML などの主要な文書形式をサポート。学術論文、技術マニュアル、電子書籍など、あらゆる文書をワンクリックでクリーンな Markdown に変換できます。',
         },
         {
-          title: '高精度 OCR',
-          text: '深層学習 OCR エンジンは中国語で98%以上の精度を誇り、日本語・韓国語・英語・フランス語など主要言語も人入力に匹敵する品質で処理します。',
+          title: '表と数式',
+          text: '文書の表を Markdown 表に、数式を LaTeX 形式に変換し、原文書の情報完全性を保持します。',
         },
         {
           title: 'スマートレイアウト',
@@ -543,7 +543,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           title: '完全オフライン',
-          text: 'すべての認識と変換はローカルで完結し、インターネットも処理待ち行列も不要。回数・ページ数の制限なく、プライバシーと速度を両立します。',
+          text: 'すべての変換はローカルで完結し、インターネットも処理待ち行列も不要。回数・ページ数の制限なく、プライバシーと速度を両立します。',
         },
         {
           title: '開発者フレンドリ',
@@ -551,7 +551,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
       ],
       stats: [
-        { label: 'OCR 精度', sub: '中国語認識', value: '98%+' },
+        { label: '対応形式', sub: '主要文書', value: '10+' },
         { label: '対応言語', sub: '多言語', value: '10+' },
         { label: '処理速度', sub: '大型 PDF', value: '5 ページ/秒' },
         { label: '通信要件', sub: '完全オフライン', value: '0' },
@@ -559,22 +559,22 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: 'どの入力形式に対応していますか？',
-          a: '画像（PNG・JPG・HEIC など）、PDF 文書、スクリーンショット、さらには手書きメモの写真まで——文字が含まれていれば変換を試せます。',
+          a: 'PDF・DOCX・EPUB・HTML などの主要な文書形式に対応し、学術論文、技術マニュアル、電子書籍など多様なシナリオをカバーします。',
         },
         {
           q: '変換後の Markdown はどのような形式ですか？',
-          a: '見出し階層・段落・リスト・コードブロック・リンク・引用などの構造を自動認識し、正しい標準 Markdown 構文に変換します。',
+          a: '見出し階層・段落・リスト・コードブロック・リンク・引用などの構造を自動認識し、標準 Markdown に変換。表は Markdown 表、数式は LaTeX 形式に変換します。',
         },
         {
-          q: '中国語の認識は正確ですか？',
-          a: '深層学習 OCR エンジンで中国語認識精度は98%以上。日本語・韓国語・英語などの主要言語にも対応しています。',
+          q: '中国語の対応は良いですか？',
+          a: '中国語文書の変換を完全サポート。中国語・日本語・韓国語の多言語混在も正しく認識・変換します。',
         },
         {
           q: '大容量ファイルは処理できますか？',
           a: '可能です。インテリジェントなメモリ管理で数百ページの大型 PDF も秒間約2〜5ページの速度で滑らかに処理されます。',
         },
         {
-          q: 'クラウド OCR ツールとの違いは？',
+          q: 'オンライン変換ツールとの違いは？',
           a: '完全ローカルなのでプライバシーの心配がなく、インターネットも待ち行列も不要。回数・ページ数の制限なく処理できます。',
         },
       ],
