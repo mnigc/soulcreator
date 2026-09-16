@@ -396,18 +396,18 @@ export const toolTranslations: Record<string, LocaleTools> = {
     en: {
       title: 'Universal to Markdown Converter',
       description:
-        'Powered by the Firecrawl anydoc engine, convert Word, PowerPoint, Excel, PDF, EPUB, RTF, CSV and 14+ office formats into high-quality GitHub-Flavored Markdown. Pure Rust, median conversion under 5ms, with full structure preservation and consistent output across all formats.',
+        'Powered by the Firecrawl anydoc engine, convert Word, PowerPoint, Excel, PDF, EPUB, RTF, CSV and 21 office document formats into high-quality GitHub-Flavored Markdown. Median conversion under 5ms, with full structure preservation and consistent output across all formats.',
       category: 'Productivity Tools',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF Conversion', 'Document Conversion', 'Rust', 'Desktop App'],
+      tags: ['Markdown', 'PDF Conversion', 'Document Conversion', 'Desktop App'],
       features: [
         {
-          title: '14+ formats covered',
-          text: 'Word (.doc/.docx/.docm), PowerPoint (.ppt/.pptx/.pptm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF—14 formats in a single dependency. The only tool to cover all of them.',
+          title: '21 formats covered',
+          text: 'Word (.doc/.docx/.docm), PowerPoint (.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF—21 formats, no need to assemble multiple converter libraries.',
         },
         {
           title: 'Blazing fast',
-          text: 'Pure Rust, no ML models, no external services. Median conversion time under 5ms—10x faster than the next-best alternative (52ms). Hundred-page documents convert in seconds.',
+          text: 'Pure Rust, no ML models, no external services. Median conversion time under 5ms—10x faster than the next-best alternative (52ms).',
         },
         {
           title: 'Full structure preserved',
@@ -421,21 +421,9 @@ export const toolTranslations: Record<string, LocaleTools> = {
           title: 'Consistent output across formats',
           text: 'Every format parses into a shared document model and renders through a single Markdown serializer. A 2003 .doc and a 2025 .pptx produce identical escaping, tables, anchors, and footnotes.',
         },
-        {
-          title: 'Content-based format detection',
-          text: 'Format is read from file bytes (PDF header, RTF open group, OLE stream names, ZIP mimetype)—not the extension. Mislabeled files still convert correctly.',
-        },
-        {
-          title: 'Multi-language bindings',
-          text: 'Rust, Node.js (npm), Python (pip), Browser (WebAssembly), and CLI. Same API everywhere, TypeScript types and Python stubs included.',
-        },
-        {
-          title: 'Developer-friendly',
-          text: 'One CLI command to convert. Node.js runs on libuv thread pool without blocking the event loop; Python releases the GIL. Drop it into any build pipeline or CI/CD.',
-        },
       ],
       stats: [
-        { label: 'Formats', sub: 'Full office coverage', value: '14+' },
+        { label: 'Formats', sub: 'Full office coverage', value: '21' },
         { label: 'Conversion speed', sub: 'Median time', value: '< 5ms' },
         { label: 'Quality score', sub: 'LLM blind test', value: '81/100' },
         { label: 'Dependencies', sub: 'Pure Rust', value: '0' },
@@ -443,7 +431,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: 'Which input formats are supported?',
-          a: '14+ office formats: Word (.doc/.docx/.docm), PowerPoint (.ppt/.pptx/.pptm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF. The only tool covering all 14.',
+          a: '21 office formats: Word (.doc/.docx/.docm), PowerPoint (.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm), Excel (.xls/.xlsx/.xlsm/.xlsb), OpenDocument (.odt/.ods/.odp), RTF, EPUB, CSV, PDF.',
         },
         {
           q: 'How is the resulting Markdown formatted?',
@@ -451,7 +439,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           q: 'How fast is it?',
-          a: 'Pure Rust, median conversion under 5ms per document. 10x faster than the next-best alternative (52ms) in benchmarks across 14 formats.',
+          a: 'Median conversion time under 5ms per document—10x faster than the next-best alternative (52ms) in benchmarks across 14 formats.',
         },
         {
           q: 'Does it support Chinese?',
@@ -459,7 +447,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           q: 'How is it better than online converters?',
-          a: 'Fully local with zero dependencies—no privacy risks; pure Rust, blazing fast with no queue waiting; quality verified by LLM blind test (81/100, highest); one CLI command for seamless automation integration.',
+          a: 'Fully local with zero dependencies—no privacy risks; quality verified by LLM blind test (81/100, highest); blazing fast with no queue waiting.',
         },
         {
           q: 'Does it support scanned PDFs?',
@@ -470,14 +458,14 @@ export const toolTranslations: Record<string, LocaleTools> = {
     ko: {
       title: '만능 to 마크다운 변환기',
       description:
-        'Firecrawl anydoc 엔진 기반으로 Word·PPT·Excel·PDF·EPUB·RTF·CSV 등 14+가지 오피스 문서를 고품질 GitHub-Flavored Markdown으로 변환합니다. 순수 Rust로 작성되어 중위 변환 속도 < 5ms, 모든 형식에서 구조가 완벽히 보존됩니다.',
+        'Firecrawl anydoc 엔진 기반으로 Word·PPT·Excel·PDF·EPUB·RTF·CSV 등 21가지 오피스 문서를 고품질 GitHub-Flavored Markdown으로 변환합니다. 중위 변환 속도 < 5ms, 모든 형식에서 구조가 완벽히 보존됩니다.',
       category: '생산성 도구',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF 변환', '문서 변환', 'Rust', '데스크톱 앱'],
+      tags: ['Markdown', 'PDF 변환', '문서 변환', '데스크톱 앱'],
       features: [
         {
-          title: '14+ 형식 전면 지원',
-          text: 'Word(.doc/.docx/.docm), PowerPoint(.ppt/.pptx/.pptm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF—14가지 형식을 하나의 의존성으로 지원합니다. 이를 모두 커버하는 유일한 도구입니다.',
+          title: '21가지 형식 전면 지원',
+          text: 'Word(.doc/.docx/.docm), PowerPoint(.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF—21가지 형식, 여러 변환 라이브러리를 조립할 필요 없음.',
         },
         {
           title: '광속 변환',
@@ -495,21 +483,9 @@ export const toolTranslations: Record<string, LocaleTools> = {
           title: '형식 간 일관된 출력',
           text: '모든 형식이 공유 문서 모델로 해석된 후 단일 마크다운 직렬화기를 통해 렌더링됩니다. 2003년의 .doc와 최신 .pptx 모두 동일한 방식으로 출력됩니다.',
         },
-        {
-          title: '콘텐츠 기반 형식 감지',
-          text: '확장명 대신 파일 바이트에서 형식을 판독(PDF 헤더, RTF 오픈 그룹, OLE 스트림명, ZIP mimetype). 잘못된 확장명의 파일도 정しく 변환됩니다.',
-        },
-        {
-          title: '다국어 바인딩',
-          text: 'Rust, Node.js(npm), Python(pip), 브라우저(WebAssembly), CLI 제공. 모든 환경에서 동일한 API, TypeScript 타입 및 Python 스텁 포함.',
-        },
-        {
-          title: '개발자 친화적',
-          text: 'CLI 한 줄 명령으로 변환. Node.js는 이벤트 루프를 차단하지 않고, Python은 GIL을 해제합니다. 빌드 파이프라인이나 CI/CD에 바로 통합 가능합니다.',
-        },
       ],
       stats: [
-        { label: '지원 형식', sub: '오피스 문서 전면 커버', value: '14+' },
+        { label: '지원 형식', sub: '오피스 문서 전면 커버', value: '21' },
         { label: '변환 속도', sub: '중위 시간', value: '< 5ms' },
         { label: '품질 점수', sub: 'LLM 블라인드 테스트', value: '81/100' },
         { label: '외부 의존성', sub: '순수 Rust', value: '0' },
@@ -517,7 +493,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: '어떤 입력 형식을 지원하나요?',
-          a: '14가지 오피스 형식을 지원합니다: Word(.doc/.docx/.docm), PowerPoint(.ppt/.pptx/.pptm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF. 14개 형식을 모두 커버하는 유일한 도구입니다.',
+          a: '21가지 오피스 형식: Word(.doc/.docx/.docm), PowerPoint(.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm), Excel(.xls/.xlsx/.xlsm/.xlsb), OpenDocument(.odt/.ods/.odp), RTF, EPUB, CSV, PDF.',
         },
         {
           q: '변환된 마크다운 형식은 어떤가요?',
@@ -525,7 +501,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           q: '얼마나 빠르나요?',
-          a: '순수 Rust로 중위 변환 속도 < 5ms/문서. 14개 형식 벤치마크에서 다음으로 빠른 도구(52ms)보다 10배 빠릅니다.',
+          a: '14개 형식 벤치마크에서 다음으로 빠른 도구(52ms)보다 10배 빠른 중위 변환 속도 < 5ms/문서.',
         },
         {
           q: '중국어 지원이 좋은가요?',
@@ -533,7 +509,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           q: '온라인 변환 도구 대비 장점은?',
-          a: '완전 로컬, 외부 의존성 0개—프라이버시 걱정 無; 순수 Rust로 광속 처리, 대기열 없음; LLM 블라인드 테스트로 품질 검증(81/100, 최고); CLI 한 줄 명령으로 자동화 통합 용이.',
+          a: '완전 로컬, 외부 의존성 0개—프라이버시 걱정 無; LLM 블라인드 테스트로 품질 검증(81/100, 최고); 광속 처리, 대기열 없음.',
         },
         {
           q: '스캔 PDF를 지원하나요?',
@@ -544,22 +520,22 @@ export const toolTranslations: Record<string, LocaleTools> = {
     ja: {
       title: '万能 to マークダウン変換',
       description:
-        'Firecrawl anydoc エンジン駆動で、Word・PowerPoint・Excel・PDF・EPUB・RTF・CSV など14以上のオフィス文書を高品質な GitHub-Flavored Markdown に変換します。純粋な Rust 実装で中位変換時間 < 5ms、全形式で構造を完璧に保存。',
+        'Firecrawl anydoc エンジン駆動で、Word・PowerPoint・Excel・PDF・EPUB・RTF・CSV など21のオフィス文書を高品質な GitHub-Flavored Markdown に変換します。中位変換時間 < 5ms、全形式で構造を完璧に保存。',
       category: '生産性ツール',
       platform: 'Windows / macOS / Linux',
-      tags: ['Markdown', 'PDF 変換', '文書変換', 'Rust', 'デスクトップアプリ'],
+      tags: ['Markdown', 'PDF 変換', '文書変換', 'デスクトップアプリ'],
       features: [
         {
-          title: '14以上の形式を全面対応',
-          text: 'Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pptx/.pptm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF—14の形式を単一依存でサポート。すべてをカバーする唯一のツール。',
+          title: '21の形式を全面対応',
+          text: 'Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF—21の形式、複数の変換ライブラリの組み合わせ不要。',
         },
         {
           title: '高速変換',
-          text: '純粋な Rust で ML モデルも外部サービスも不要。中位変換時間 < 5ms となext-best(52ms)の10倍速。数百ページでも数秒で完了。',
+          text: '純粋な Rust で ML モデルも外部サービスも不要。中位変換時間 < 5ms となext-best(52ms)の10倍速。',
         },
         {
           title: '完全な構造保存',
-          text: '見出し（アンカー付き）、太字/イタリック/取り消し線、インラインコード、コードブロック、リンクと相互参照、中첩リスト、マージセル表、引用、脚注/末尾注、発表者ノートまで標準 Markdown に。',
+          text: '見出し（アンカー付き）、太字/イタリック/取り消し線、インラインコード、コードブロック、リンクと相互参照、中첩리스트、マージセル表、引用、脚注/末尾注、発表者ノートまで標準 Markdown に。',
         },
         {
           title: '数式 → LaTeX',
@@ -569,21 +545,9 @@ export const toolTranslations: Record<string, LocaleTools> = {
           title: '形式間の一貫した出力',
           text: '全形式が共有ドキュメントモデルに解析され、単一 Markdown シリアライザーでレンダリング。2003年の .doc と最新 .pptx でもエスケープ・表・アンカー・脚注の挙動が完全一致。',
         },
-        {
-          title: 'コンテンツベース形式検出',
-          text: '拡張子ではなくファイルバイトから形式を判読（PDF ヘッダー、RTF オープングループ、OLE ストリーム名、ZIP mimetype）。誤った拡張子のファイルも正しく変換。',
-        },
-        {
-          title: '多言語バインディング',
-          text: 'Rust、Node.js(npm)、Python(pip)、ブラウザ(WebAssembly)、CLI を提供。全環境で同一 API、TypeScript 型・Python スタブ付き。',
-        },
-        {
-          title: '開発者フレンドリ',
-          text: 'CLI 一行コマンドで変換。Node.js はイベントループをブロックせず、Python は GIL を解放。ビルドパイプラインや CI/CD に即時統合可能。',
-        },
       ],
       stats: [
-        { label: '対応形式', sub: 'オフィス文書全面カバー', value: '14+' },
+        { label: '対応形式', sub: 'オフィス文書全面カバー', value: '21' },
         { label: '変換速度', sub: '中位時間', value: '< 5ms' },
         { label: '品質スコア', sub: 'LLM ブラインドテスト', value: '81/100' },
         { label: '外部依存', sub: '純粋な Rust', value: '0' },
@@ -591,15 +555,15 @@ export const toolTranslations: Record<string, LocaleTools> = {
       faq: [
         {
           q: 'どの入力形式に対応していますか？',
-          a: '14のオフィス形式に対応：Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pptx/.pptm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF。14形式すべてをカバーする唯一のツール。',
+          a: '21のオフィス形式：Word(.doc/.docx/.docm)、PowerPoint(.ppt/.pps/.pot/.pptx/.pptm/.ppsx/.ppsm)、Excel(.xls/.xlsx/.xlsm/.xlsb)、OpenDocument(.odt/.ods/.odp)、RTF、EPUB、CSV、PDF。',
         },
         {
           q: '変換後の Markdown はどのような形式ですか？',
-          a: '見出し（アンカー付き）、太字/イタリック/取り消し線、インラインコード、コードブロック、リンク、中첩リスト、マージセル表、引用、脚注/末尾注、発表者ノートまで保存。数式は LaTeX、表は Markdown 表に変換。',
+          a: '見出し（アンカー付き）、太字/イタリック/取りこし線、インラインコード、コードBlockSize、リンク、中첩リスト、マージセル表、引用、脚注/末尾注、発表者ノートまで保存。数式は LaTeX、表は Markdown 表に変換。',
         },
         {
           q: 'どのくらい速いですか？',
-          a: '純粋な Rust で中位変換時間 < 5ms/文書。14形式ベンチマークで次点のツール(52ms)より10倍速。',
+          a: '14形式ベンチマークで次点のツール(52ms)より10倍速の中位変換時間 < 5ms/文書。',
         },
         {
           q: '中国語の対応は良いですか？',
@@ -607,7 +571,7 @@ export const toolTranslations: Record<string, LocaleTools> = {
         },
         {
           q: 'オンライン変換ツールとの違いは？',
-          a: '完全ローカル、外部依存0—プライバシーリスクなし。純粋な Rust で超高速、待ち行列なし。LLM ブラインドテストで品質検証済み(81/100、最高)。CLI 一行で自動化に簡単に統合。',
+          a: '完全ローカル、外部依存0—プライバシーリスクなし。LLM ブラインドテストで品質検証済み(81/100、最高)。超高速、待ち行列なし。',
         },
         {
           q: 'スキャン PDF は対応しますか？',
