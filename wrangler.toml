@@ -1,13 +1,6 @@
 name = "soulcreator"
 compatibility_date = "2024-11-01"
-main = "src/worker.ts"
 
 [assets]
 directory = "./dist"
-binding = "ASSETS"
-not_found_handling = "none"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "soulcreator-visits"
-database_id = "51b9d33a-2a71-4266-9e23-7ffdd9a18021"
+not_found_handling = "404-page"

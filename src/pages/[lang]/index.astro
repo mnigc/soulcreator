@@ -1,73 +1,37 @@
 ---
 import Base from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { t, getToolI18n, toolOrder, localeParams, type Locale } from '../../i18n';
-import ToolCard from '../../components/ui/ToolCard.astro';
+import { t, localeParams, type Locale } from '../../i18n';
+import { getPosts, formatDate } from '../../lib/content';
+
 export async function getStaticPaths() {
   return localeParams();
 }
 
 const locale = Astro.params.lang as Locale;
-
-const tools = await getCollection('tools');
-const localizedTools = tools.map((entry) => {
-  const i18n = getToolI18n(entry.data, entry.slug, locale);
-  return { slug: entry.slug, ...entry.data, ...i18n };
-});
-const ordered = toolOrder
-  .map((slug) => localizedTools.find((tool) => tool.slug === slug))
-  .filter(Boolean);
-
-const pageTitle = `${t(locale, 'hero.title1')} ${t(locale, 'hero.titleAccent')} — SoulCreator`;
-const pageDesc = t(locale, 'hero.lede');
+const recentPosts = (await getPosts()).slice(0, 5);
 ---
 
-<Base title={pageTitle} description={pageDesc} locale={locale}>
-   <section class="hero">
-     <canvas class="hero-particles" aria-hidden="true"></canvas>
-     <div class="hero-grid">
-       <div class="hero-text">
-         <span class="hero-badge">{t(locale, 'hero.badge')}</span>
-         <h1 class="hero-title">
-           {t(locale, 'hero.title1')}<br /><span class="accent">{t(locale, 'hero.titleAccent')}</span>
-         </h1>
-         <p class="hero-lede">{t(locale, 'hero.lede')}</p>
-         <div class="hero-cta">
-           <a href={`/${locale}/tools`} class="btn btn-primary">
-             {t(locale, 'hero.ctaBrowse')}
-             <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-               <path d="M5 10h10M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
-             </svg>
-           </a>
-           <a href="https://github.com/mnigc" class="btn btn-outline" target="_blank" rel="noopener">
-             {t(locale, 'hero.ctaGithub')}
-           </a>
-         </div>
-       </div>
-       <div class="hero-visual" aria-hidden="true">
-         <div class="hero-3d">
-           <div class="shape shape-cube">
-             <div class="face cf1"></div>
-             <div class="face cf2"></div>
-             <div class="face cf3"></div>
-             <div class="face cf4"></div>
-             <div class="face cf5"></div>
-             <div class="face cf6"></div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="hero-scroll-hint" aria-hidden="true"></div>
-   </section>
+<Base title={t(locale, 'meta.home.title')} description={t(locale, 'meta.home.desc')} locale={locale}>
+  <article class="prose">
+    <h1 set:html={t(locale, 'home.hello')} />
+    <p class="lede">{t(locale, 'home.intro')}</p>
+    <p class="callout">{t(locale, 'home.notice')}</p>
 
-  <section class="section page" data-od-id="featured-tools">
-    <div class="section-head">
-      <span class="label">{t(locale, 'sec.tools.label')}</span>
-      <h2>{t(locale, 'sec.tools.title')}</h2>
-      <p>{t(locale, 'sec.tools.desc')}</p>
-    </div>
-    <div class="tool-grid">
-      {ordered.map((tool) => <ToolCard {...tool} locale={locale} />)}
-    </div>
-   </section>
+    <section class="home-section" id="writing">
+      <h2>{t(locale, 'home.writing.title')}</h2>
+      <ul class="post-list">
+        {recentPosts.map((post) => (
+          <li class="post-row">
+            <a href={`/zh/writing/${post.id}/`}>{post.data.title}</a>
+            <span class="leader" aria-hidden="true"></span>
+            <time datetime={formatDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+          </li>
+        ))}
+        <li class="post-row post-row-more">
+          <a href={`/${locale}/writing/`}>{t(locale, 'home.writing.all')} <span class="arr" aria-hidden="true">→</span></a>
+          <span class="leader" aria-hidden="true"></span>
+        </li>
+      </ul>
+    </section>
+  </article>
 </Base>

@@ -1,129 +1,38 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../../layouts/BaseLayout.astro';
-import ToolIcon from '../../../components/ui/ToolIcon.astro';
-import FaqItem from '../../../components/ui/FaqItem.astro';
-import { getIconBySlug } from '../../../components/ui/iconMap';
-import { t, getToolI18n, locales, type Locale } from '../../../i18n';
+import { render } from 'astro:content';
+import { t, locales, type Locale } from '../../../i18n';
+import { getTools } from '../../../lib/content';
 
 export async function getStaticPaths() {
-  const tools = await getCollection('tools');
-  return tools.flatMap((entry) =>
-    locales.map((lang) => ({
-      params: { lang, slug: entry.slug },
-      props: { entry },
-    }))
+  const paths = await Promise.all(
+    locales.map(async (lang) => {
+      const tools = await getTools(lang);
+      return tools.map(({ entry, slug }) => ({
+        params: { lang, slug },
+        props: { entry },
+      }));
+    }),
   );
+  return paths.flat();
 }
 
-const locale = Astro.params.lang as Locale;
 const { entry } = Astro.props;
-const data = entry.data;
-const i18n = getToolI18n(data, entry.slug, locale);
-const tool = { slug: entry.slug, ...data, ...i18n };
-const slug = entry.slug;
-const icon = getIconBySlug(slug);
+const locale = Astro.params.lang as Locale;
+const { Content } = await render(entry);
 ---
 
-<script type="application/ld+json">
-  {JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: tool.title,
-    description: tool.description,
-    applicationCategory: tool.category,
-    operatingSystem: tool.platform,
-    offers: { '@type': 'Offer', price: '0' },
-  })}
-</script>
-
-<Base title={`${tool.title} — SoulCreator`} description={tool.description} locale={locale}>
-  <section class="detail-hero page">
-    <div class="detail-hero-grid">
-      <div>
-        <div class="detail-hero-head">
-          <a href={`/${locale}/tools`} class="detail-back" aria-label={t(locale, 'tool.back')}>
-            <ToolIcon name="arrow" size={14} />
-            <span>{t(locale, 'tool.back')}</span>
-          </a>
-          <span class="detail-category">{tool.category}</span>
-        </div>
-        <span class="detail-badge">■ {tool.platform}</span>
-        <h1 class="detail-title">{tool.title}</h1>
-        <p class="detail-sub">{tool.description}</p>
-        <div class="detail-tags">
-          {tool.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </div>
-        <div class="detail-cta">
-          <a href="https://github.com/mnigc" class="btn btn-primary" target="_blank" rel="noopener">
-            <ToolIcon name="github" size={14} />
-            <span>{t(locale, 'tool.github')}</span>
-          </a>
-          <a href={`/${locale}/tools`} class="btn btn-outline">
-            <ToolIcon name="arrow" size={14} />
-            <span>{t(locale, 'tools.viewAll')}</span>
-          </a>
-        </div>
-      </div>
-      <div class="detail-hero-icon">
-        <div class="detail-icon-badge">
-          <ToolIcon name={icon} size={48} />
-        </div>
-        <span class="detail-icon-label">{t(locale, 'tool.product')}</span>
-      </div>
+<Base title={`${entry.data.title} — SoulCreator`} description={entry.data.description} locale={locale}>
+  <article class="prose">
+    <p class="breadcrumb"><a href={`/${locale}/tools/`}><span class="arr" aria-hidden="true">←</span> {t(locale, 'nav.tools')}</a></p>
+    <h1>{entry.data.title}</h1>
+    <p class="tool-meta">
+      <span class="platform">{entry.data.platform}</span>
+      <span aria-hidden="true">·</span>
+      <a href={entry.data.github} target="_blank" rel="noopener">GitHub <span class="arr" aria-hidden="true">↗</span></a>
+    </p>
+    <div class="prose-md">
+      <Content />
     </div>
-  </section>
-
-  {tool.stats && tool.stats.length > 0 && (
-    <section class="section page" data-od-id="tool-stats">
-      <div class="section-head">
-        <span class="label">{t(locale, 'tool.stats.label')}</span>
-        <h2>{t(locale, 'tool.stats.title')}</h2>
-        <p>{t(locale, 'tool.stats.desc')}</p>
-      </div>
-      <div class="stats-grid">
-        {tool.stats.map((item) => (
-          <div class="stats-cell">
-            <span class="stats-label">{item.label}</span>
-            <span class="stats-value">{item.value}</span>
-            <span class="stats-sub">▲ {item.sub}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  )}
-
-  {tool.features && tool.features.length > 0 && (
-    <section class="section page" data-od-id="tool-features">
-      <div class="section-head">
-        <span class="label">{t(locale, 'tool.features.label')}</span>
-        <h2>{t(locale, 'tool.features.title')}</h2>
-        <p>{t(locale, 'tool.features.desc')}</p>
-      </div>
-      <div class="feature-grid">
-        {tool.features.map((feat, i) => (
-          <div class="feature-card">
-            <div class="feature-num">0{i + 1}</div>
-            <h4 class="feature-title">{feat.title}</h4>
-            <p class="feature-text">{feat.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )}
-
-  {tool.faq && tool.faq.length > 0 && (
-    <section class="section page" data-od-id="tool-faq">
-      <div class="section-head" style="text-align: center;">
-        <span class="label">{t(locale, 'tool.faq.label')}</span>
-        <h2>{t(locale, 'tool.faq.title')}</h2>
-        <p style="margin-inline: auto;">{t(locale, 'tool.faq.desc')}</p>
-      </div>
-      <div class="faq-grid">
-        {tool.faq.map((item) => (
-          <FaqItem q={item.q} a={item.a} />
-        ))}
-      </div>
-    </section>
-  )}
+  </article>
 </Base>

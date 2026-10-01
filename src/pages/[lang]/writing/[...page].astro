@@ -1,0 +1,47 @@
+---
+import Base from '../../../layouts/BaseLayout.astro';
+import { t, locales, type Locale } from '../../../i18n';
+import { getPosts, formatDate } from '../../../lib/content';
+
+/** 写作索引分页:每页 20 篇,量大了列表页也不会变重。 */
+export async function getStaticPaths({ paginate }) {
+  const posts = await getPosts();
+  return locales.flatMap((lang) => paginate(posts, { params: { lang }, pageSize: 20 }));
+}
+
+const { page } = Astro.props;
+const locale = Astro.params.lang as Locale;
+const pageStatus = t(locale, 'writing.page')
+  .replace('{current}', String(page.currentPage))
+  .replace('{total}', String(page.lastPage));
+---
+
+<Base title={`${t(locale, 'writing.h1')} — SoulCreator`} description={t(locale, 'writing.desc')} locale={locale}>
+  <article class="prose">
+    <h1>{t(locale, 'writing.h1')}</h1>
+    <p class="section-desc">
+      {locale === 'en' && t(locale, 'writing.enNotice')}
+      {locale === 'zh' && t(locale, 'writing.desc')}
+    </p>
+    <ul class="post-list">
+      {page.data.map((post) => (
+        <li class="post-row">
+          <a href={`/zh/writing/${post.id}/`}>{post.data.title}</a>
+          <span class="leader" aria-hidden="true"></span>
+          <time datetime={formatDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+        </li>
+      ))}
+    </ul>
+    {page.lastPage > 1 && (
+      <nav class="pager" aria-label={t(locale, 'nav.label')}>
+        {page.url.prev ? (
+          <a href={page.url.prev}><span class="arr arr-prev" aria-hidden="true">←</span> {t(locale, 'writing.prev')}</a>
+        ) : <span class="pager-slot" aria-hidden="true"></span>}
+        <span class="pager-status">{pageStatus}</span>
+        {page.url.next ? (
+          <a href={page.url.next}>{t(locale, 'writing.next')} <span class="arr arr-next" aria-hidden="true">→</span></a>
+        ) : <span class="pager-slot" aria-hidden="true"></span>}
+      </nav>
+    )}
+  </article>
+</Base>

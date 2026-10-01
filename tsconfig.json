@@ -4,8 +4,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,
-    "jsx": "preserve",
-    "jsxImportSource": "preact",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassNames": true,
@@ -15,5 +13,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "data"]
+  "include": ["src"]
 }
