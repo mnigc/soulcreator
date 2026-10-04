@@ -3,6 +3,7 @@ import Base from '../../../layouts/BaseLayout.astro';
 import { render } from 'astro:content';
 import { t, type Locale } from '../../../i18n';
 import { getPosts, formatDate } from '../../../lib/content';
+import { getToc } from '../../../lib/toc';
 
 // Posts are written in Chinese; only zh pages are generated. The en writings
 // list links here directly (see writing/index.astro).
@@ -17,11 +18,19 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const locale = Astro.params.lang as Locale;
 const { Content } = await render(post);
+// 侧栏顶部用大纲替换联系方式；没有小标题的文章保持原样
+const toc = getToc(post.body ?? '');
 ---
 
-<Base title={`${post.data.title} — SoulCreator`} description={post.data.description} locale={locale} noAlternate>
+<Base
+  title={`${post.data.title} — SoulCreator`}
+  description={post.data.description}
+  locale={locale}
+  noAlternate
+  outline={toc}
+  back={{ href: `/${locale}/writing/`, label: t(locale, 'writing.h1') }}
+>
   <article class="prose">
-    <p class="breadcrumb"><a href={`/${locale}/writing/`}><span class="arr" aria-hidden="true">←</span> {t(locale, 'nav.writing')}</a></p>
     <h1>{post.data.title}</h1>
     <p class="post-meta">
       <time datetime={formatDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>

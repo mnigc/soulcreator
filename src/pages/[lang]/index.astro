@@ -13,7 +13,76 @@ const recentPosts = (await getPosts()).slice(0, 5);
 
 <Base title={t(locale, 'meta.home.title')} description={t(locale, 'meta.home.desc')} locale={locale}>
   <article class="prose">
-    <h1 set:html={t(locale, 'home.hello')} />
+    <h1 id="hello" set:html={t(locale, 'home.hello')} />
+    <!-- 打字机问候:循环用各种语言打字自我介绍。
+         渐进增强——上方静态标题供 SEO 与无 JS 场景,尊重 prefers-reduced-motion;
+         👋 始终在场,内联排布使其随文本伸缩自然左右移动。 -->
+    <script is:inline define:vars={{ startIdx: locale === 'en' ? 1 : 0 }}>
+      (function () {
+        var h1 = document.getElementById('hello');
+        if (!h1) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        // 每条问候 = [名字前的文字, 名字, 名字后的文字];名字按各语言的准确写法:
+        // 中文汉字 / 拉丁字母用拼音 / 日语直接用汉字 / 韩语按现代音译 / 俄语按帕拉第音译
+        var list = [
+          ['你好，我是', '郭超', '。'],
+          ["Hi, I'm ", 'Guochao', '.'],
+          ['Olá, eu sou o ', 'Guochao', '.'],
+          ['Hola, soy ', 'Guochao', '.'],
+          ['Bonjour, je suis ', 'Guochao', '.'],
+          ['Hallo, ich bin ', 'Guochao', '.'],
+          ['こんにちは、', '郭超', 'です。'],
+          ['안녕하세요, 저는 ', '궈차오', '입니다.'],
+          ['Привет, я ', 'Го Чао', '.']
+        ];
+
+        var wave = h1.querySelector('.wave');
+        h1.setAttribute('aria-label', h1.textContent.replace('👋', '').trim());
+        var box = document.createElement('span');
+        box.setAttribute('aria-hidden', 'true');
+        h1.textContent = '';
+        h1.appendChild(box);
+        h1.appendChild(wave);
+
+        var segs, timer, idx = startIdx;
+
+        function startGreeting() {
+          var g = list[idx];
+          segs = [
+            { el: document.createElement('span'), full: g[0] },
+            { el: document.createElement('em'), full: g[1] },
+            { el: document.createElement('span'), full: g[2] }
+          ];
+          segs[1].el.className = 'accent';
+          var si = 0, ci = 0;
+          segs.forEach(function (s) { box.appendChild(s.el); });
+          (function step() {
+            if (si >= segs.length) { timer = setTimeout(erase, 2200); return; }
+            var s = segs[si];
+            if (ci < s.full.length) {
+              s.el.textContent = s.full.slice(0, ++ci);
+              timer = setTimeout(step, 55 + Math.random() * 60);
+            } else { si++; ci = 0; step(); }
+          })();
+        }
+
+        function erase() {
+          for (var si = segs.length - 1; si >= 0; si--) {
+            var s = segs[si];
+            if (s.el.textContent) {
+              s.el.textContent = s.el.textContent.slice(0, -1);
+              timer = setTimeout(erase, 26);
+              return;
+            }
+          }
+          idx = (idx + 1) % list.length;
+          timer = setTimeout(startGreeting, 350);
+        }
+
+        startGreeting();
+      })();
+    </script>
     <p class="lede">{t(locale, 'home.intro')}</p>
     <p class="callout">{t(locale, 'home.notice')}</p>
 

@@ -5,4 +5,5 @@ export const contact = {
   email: 'guochao6040@gmail.com',
   wechat: 'club_60',
   wechatQr: '', // 可选，如 '/wechat-qr.png'
+  instagramHandle: 'tscrj', // 侧栏展示 Instagram @handle，链接由它拼出
 };

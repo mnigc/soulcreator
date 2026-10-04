@@ -14,7 +14,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
 
 <Base title={t(locale, 'meta.tools.title')} description={t(locale, 'meta.tools.desc')} locale={locale}>
   <article class="prose">
-    <h1>{t(locale, 'nav.tools')}</h1>
+    <h1>{t(locale, 'tools.h1')}</h1>
     <p class="section-desc">{t(locale, 'tools.desc')}</p>
     <div class="tool-grid">
       {tools.map(({ entry, slug }, i) => (

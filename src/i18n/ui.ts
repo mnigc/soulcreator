@@ -5,9 +5,9 @@ type Dict = Record<string, string>;
 const zh: Dict = {
   'nav.skip': '跳到内容',
   'nav.label': '站内导航',
-  'nav.tools': '工具',
-  'nav.writing': '写作',
-  'nav.about': '关于',
+  'nav.tools': '🧰 工具',
+  'nav.writing': '📝 博客',
+  'nav.about': '🙋 关于',
   'theme.auto': '主题：跟随系统',
   'theme.light': '主题：浅色',
   'theme.dark': '主题：深色',
@@ -21,16 +21,17 @@ const zh: Dict = {
   'meta.about.desc':
     'SoulCreator 是一个独立工具开发者项目，专注于解决真实场景中的效率问题。',
 
-  'home.hello': '你好，我是 <em class="accent">SoulCreator</em>。',
+  'home.hello': '你好，我是<em class="accent">郭超</em>。<span class="wave" aria-hidden="true">👋</span>',
   'home.intro':
-    '一名独立开发者。这里的工具都来自我日常里的痛点——顺手做出来，免费、开源、能本地跑就本地跑。不追求「生态」，只解决真实的小问题。',
+    '93 年生人，做过 UI 设计师、产品经理、项目经理，兜兜转转，还是最喜欢亲手把想法做成东西的感觉。科技、电子产品、开源和各种新技术，是我戒不掉的热情；代码之外，羽毛球、乒乓球、摄影和一杯好咖啡，也总能让我开心很久。',
   'home.notice':
-    '工具都在持续维护。遇到问题或有想法，去 GitHub 提个 Issue 就能找到我。',
+    '工具都在持续维护。遇到问题或有想法，欢迎随时联系我。',
   'tools.desc': '每一个都为了解决一个具体的小问题。',
+  'tools.h1': '工具',
   'home.writing.title': '最近文章',
   'home.writing.all': '全部文章',
 
-  'writing.h1': '写作',
+  'writing.h1': '博客',
   'writing.desc': '记录做这些工具过程中的想法与折腾。',
   'writing.enNotice': '文章以中文撰写，点击标题阅读原文。',
   'writing.prev': '上一页',
@@ -48,6 +49,7 @@ const zh: Dict = {
   'about.contact.text': '有想法或建议？欢迎通过 GitHub 联系我：',
 
   'side.contact': '联系',
+  'side.outline': '目录',
   'side.more': '更多',
   'side.source': '本站源码',
   'side.email': '邮箱',
@@ -62,9 +64,9 @@ const zh: Dict = {
 const en: Dict = {
   'nav.skip': 'Skip to content',
   'nav.label': 'Site navigation',
-  'nav.tools': 'Tools',
-  'nav.writing': 'Writing',
-  'nav.about': 'About',
+  'nav.tools': '🧰 Tools',
+  'nav.writing': '📝 Blog',
+  'nav.about': '🙋 About',
   'theme.auto': 'Theme: system',
   'theme.light': 'Theme: light',
   'theme.dark': 'Theme: dark',
@@ -78,16 +80,17 @@ const en: Dict = {
   'meta.about.desc':
     'SoulCreator is a one-person tool project focused on solving real, everyday efficiency problems.',
 
-  'home.hello': "Hi, I'm <em class='accent'>SoulCreator</em>.",
+  'home.hello': "Hi, I'm <em class='accent'>Guochao</em>. <span class='wave' aria-hidden='true'>👋</span>",
   'home.intro':
-    'An indie developer. Everything here started as a scratch for my own itch — small tools I built for myself, then shared: free, open source, and local-first wherever possible. No platforms, no ecosystems — just real little problems, solved.',
+    "Born in 1993, I've been a UI designer, a product manager, and a project manager — but what I love most is rolling up my sleeves and turning ideas into things. Tech, gadgets, open source, and every new technology I can get my hands on are passions I can't shake; away from code, badminton, table tennis, photography, and a good cup of coffee never fail to make my day.",
   'home.notice':
-    'Everything is actively maintained. Found a bug or have an idea? Open an issue on GitHub.',
+    'Everything is actively maintained. Found a bug or have an idea? Feel free to reach out.',
   'tools.desc': 'Each one solves one specific small problem.',
+  'tools.h1': 'Tools',
   'home.writing.title': 'Recent writing',
   'home.writing.all': 'All posts',
 
-  'writing.h1': 'Writing',
+  'writing.h1': 'Blog',
   'writing.desc': 'Notes and detours from building these tools.',
   'writing.enNotice': 'Posts are written in Chinese — titles link to the Chinese articles.',
   'writing.prev': 'Previous',
@@ -106,6 +109,7 @@ const en: Dict = {
   'about.contact.text': 'Ideas or feedback? Reach me on GitHub:',
 
   'side.contact': 'Contact',
+  'side.outline': 'Outline',
   'side.more': 'More',
   'side.source': 'Site source',
   'side.email': 'Email',
