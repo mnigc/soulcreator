@@ -334,7 +334,14 @@ main { grid-column: 2; grid-row: 1; }
   line-height: 1.5;
 }
 .toc li { padding-block: 0.32rem; }
-.toc li a { font-size: 0.86rem; }
+/* 单行截断,长标题以省略号收尾;全文靠 a 的 title 悬停展示 */
+.toc li a {
+  font-size: 0.86rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .toc li.d3 { padding-left: 0.65rem; }
 
 /* 侧栏是固钉的：大纲比视口高时允许内部滚动，但不露滚动条 */

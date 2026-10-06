@@ -163,7 +163,7 @@ const githubUrl = 'https://github.com/mnigc';
               <ul>
                 {outline.map((item) => (
                   <li class={item.depth > 2 ? 'd3' : undefined}>
-                    <a href={`#${item.slug}`}>{item.text}</a>
+                    <a href={`#${item.slug}`} title={item.text}>{item.text}</a>
                   </li>
                 ))}
               </ul>
